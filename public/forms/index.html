@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Forms — 111 ATL</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;700&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #D947A8;
+            --secondary: #D9B44A;
+            --dark: #0D0D10;
+            --surface: #1a1a1f;
+            --border: #2a2a2f;
+            --text: #ffffff;
+            --text-muted: #aaaaaa;
+            --text-secondary: #666666;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, var(--dark) 0%, #16161b 50%, var(--dark) 100%);
+            color: var(--text);
+            min-height: 100vh;
+            padding: 0;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 20% 80%, rgba(217, 71, 168, 0.05) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 20%, rgba(217, 180, 74, 0.05) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        header {
+            padding: 60px 0 40px;
+            animation: fadeInDown 0.8s ease-out;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: var(--primary);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            letter-spacing: 1px;
+        }
+
+        .back-link:hover {
+            color: var(--secondary);
+            transform: translateX(-4px);
+        }
+
+        h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 56px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            font-size: 18px;
+            color: var(--text-muted);
+            font-weight: 300;
+        }
+
+        .forms-section {
+            margin-bottom: 60px;
+        }
+
+        .section-title {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--primary);
+            color: var(--secondary);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* FORMS GRID */
+        .forms-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        /* FORM CARD */
+        .form-card {
+            background: rgba(26, 26, 31, 0.6);
+            border: 2px solid var(--border);
+            border-radius: 16px;
+            padding: 30px;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            text-decoration: none;
+            color: var(--text);
+            display: flex;
+            flex-direction: column;
+            backdrop-filter: blur(10px);
+            animation: fadeInUp 0.6s ease-out backwards;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .form-card:hover {
+            border-color: var(--primary);
+            background: rgba(26, 26, 31, 0.95);
+            transform: translateY(-12px);
+            box-shadow: 0 30px 60px rgba(217, 71, 168, 0.25);
+        }
+
+        .form-icon {
+            font-size: 40px;
+            margin-bottom: 15px;
+        }
+
+        .form-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .form-description {
+            font-size: 14px;
+            color: var(--text-muted);
+            margin-bottom: 20px;
+            flex-grow: 1;
+            line-height: 1.6;
+        }
+
+        .form-meta {
+            font-size: 12px;
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .form-button {
+            display: inline-block;
+            padding: 12px 20px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: var(--dark);
+            border: none;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 700;
+            cursor: pointer;
+            text-decoration: none;
+            text-align: center;
+            transition: all 0.3s ease;
+            align-self: flex-start;
+            letter-spacing: 1px;
+        }
+
+        .form-card:hover .form-button {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 30px rgba(217, 71, 168, 0.3);
+        }
+
+        /* QUICK ACCESS */
+        .quick-access {
+            background: linear-gradient(135deg, rgba(217, 71, 168, 0.12), rgba(217, 180, 74, 0.08));
+            border: 2px solid var(--primary);
+            border-radius: 16px;
+            padding: 50px 40px;
+            margin: 60px 0;
+            text-align: center;
+            animation: fadeInUp 0.8s ease-out 0.5s backwards;
+        }
+
+        .quick-access h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 36px;
+            margin-bottom: 15px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .quick-access-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .quick-link {
+            padding: 15px;
+            background: rgba(217, 71, 168, 0.15);
+            border: 2px solid var(--primary);
+            border-radius: 8px;
+            color: var(--primary);
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            letter-spacing: 1px;
+        }
+
+        .quick-link:hover {
+            background: var(--primary);
+            color: var(--dark);
+            transform: translateY(-4px);
+        }
+
+        /* FOOTER */
+        footer {
+            text-align: center;
+            padding: 60px 0;
+            border-top: 2px solid var(--border);
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+
+        footer a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        footer a:hover {
+            color: var(--secondary);
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 32px;
+            }
+
+            .forms-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .quick-access {
+                padding: 40px 20px;
+            }
+
+            .quick-access h2 {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <a href="/" class="back-link">← BACK TO DIRECTORY</a>
+            <h1>All Forms</h1>
+            <p class="subtitle">Registration & Submission Forms — Direct Access</p>
+        </header>
+
+        <!-- EVENTS & TICKETING -->
+        <div class="forms-section">
+            <h2 class="section-title">🎫 Events & Ticketing</h2>
+            <div class="forms-grid">
+                <a href="https://just-huglife.com/wasted-weekends" class="form-card">
+                    <div class="form-icon">🎫</div>
+                    <h3 class="form-title">WASTED WEEKENDS</h3>
+                    <p class="form-description">Saturday tickets. Choose your tier: Shot + Entry, VIP, or Complimentary.</p>
+                    <p class="form-meta">Ticketing • QR Confirmation</p>
+                    <button class="form-button">GET TICKETS →</button>
+                </a>
+
+                <a href="https://goodtimesworldwide.com" target="_blank" class="form-card">
+                    <div class="form-icon">🎉</div>
+                    <h3 class="form-title">Good Times RSVP</h3>
+                    <p class="form-description">RSVP for Good Times events. 1,648 venues. 147 active events.</p>
+                    <p class="form-meta">RSVP • Confirmation</p>
+                    <button class="form-button">RSVP NOW →</button>
+                </a>
+
+                <a href="https://foreverfutbolmuseum.com" target="_blank" class="form-card">
+                    <div class="form-icon">⚽</div>
+                    <h3 class="form-title">Forever Futbol Tickets</h3>
+                    <p class="form-description">6-week football culture experience. May 29 - July 6.</p>
+                    <p class="form-meta">Tickets • Museum Passes</p>
+                    <button class="form-button">BOOK NOW →</button>
+                </a>
+            </div>
+        </div>
+
+        <!-- WELLNESS & SERVICES -->
+        <div class="forms-section">
+            <h2 class="section-title">💪 Wellness & Services</h2>
+            <div class="forms-grid">
+                <a href="https://reset-therapy.vercel.app" target="_blank" class="form-card">
+                    <div class="form-icon">🔄</div>
+                    <h3 class="form-title">Reset Therapy Booking</h3>
+                    <p class="form-description">Wellness & therapeutic sessions. 18 services. SMS onboarding.</p>
+                    <p class="form-meta">Booking • Confirmation</p>
+                    <button class="form-button">BOOK SESSION →</button>
+                </a>
+
+                <a href="https://themindstudioworldwide.com" target="_blank" class="form-card">
+                    <div class="form-icon">🧠</div>
+                    <h3 class="form-title">Mind Studio Portal</h3>
+                    <p class="form-description">Coaching, therapy, wellness services. Professional team.</p>
+                    <p class="form-meta">Services • Portal</p>
+                    <button class="form-button">ACCESS PORTAL →</button>
+                </a>
+
+                <a href="https://oncallallday.com" target="_blank" class="form-card">
+                    <div class="form-icon">📞</div>
+                    <h3 class="form-title">On Call Services</h3>
+                    <p class="form-description">Concierge, personal, lifestyle services. 24/7 available.</p>
+                    <p class="form-meta">On-Demand • Immediate</p>
+                    <button class="form-button">REQUEST SERVICE →</button>
+                </a>
+            </div>
+        </div>
+
+        <!-- EMERGENCY & SUPPORT -->
+        <div class="forms-section">
+            <h2 class="section-title">🚨 Emergency & Support</h2>
+            <div class="forms-grid">
+                <a href="https://thesuperherosonstandby.com" target="_blank" class="form-card">
+                    <div class="form-icon">🚨</div>
+                    <h3 class="form-title">SOS Assistance</h3>
+                    <p class="form-description">Emergency roadside assistance. Breakdown support. 24/7.</p>
+                    <p class="form-meta">Emergency • 24/7</p>
+                    <button class="form-button">GET HELP →</button>
+                </a>
+
+                <a href="https://help911.app" target="_blank" class="form-card">
+                    <div class="form-icon">⚖️</div>
+                    <h3 class="form-title">Help 911 Legal</h3>
+                    <p class="form-description">Legal referral & victim support. Immediate help. Confidential.</p>
+                    <p class="form-meta">Legal • Support</p>
+                    <button class="form-button">GET LEGAL HELP →</button>
+                </a>
+            </div>
+        </div>
+
+        <!-- QUICK ACCESS -->
+        <div class="quick-access">
+            <h2>Popular Forms</h2>
+            <p style="color: var(--text-muted); margin-bottom: 20px;">Quick access to the most used forms</p>
+            <div class="quick-access-grid">
+                <a href="https://just-huglife.com/wasted-weekends" class="quick-link">WASTED WEEKENDS</a>
+                <a href="https://reset-therapy.vercel.app" target="_blank" class="quick-link">RESET THERAPY</a>
+                <a href="https://oncallallday.com" target="_blank" class="quick-link">ON CALL</a>
+                <a href="https://help911.app" target="_blank" class="quick-link">HELP 911</a>
+                <a href="https://foreverfutbolmuseum.com" target="_blank" class="quick-link">FOREVER FUTBOL</a>
+                <a href="https://goodtimesworldwide.com" target="_blank" class="quick-link">GOOD TIMES</a>
+            </div>
+        </div>
+
+        <footer>
+            <p>All forms are secure, encrypted, and GDPR-compliant.</p>
+            <p style="margin-top: 15px;"><a href="/">← Back to Directory</a> | <a href="/social">Contact Info</a></p>
+            <p style="margin-top: 20px;">&copy; 2026 The Kollective Hospitality Group</p>
+        </footer>
+    </div>
+</body>
+</html>
