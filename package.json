@@ -1,0 +1,14 @@
+{
+  "name": "111atl",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "111ATL standalone nightlife booking and lead capture site.",
+  "scripts": {
+    "build": "echo '111ATL static site ready'",
+    "start": "echo 'Serve with Vercel or any static server'"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
