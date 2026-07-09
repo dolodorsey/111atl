@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>111ATL | Atlanta Nights, Bookings, Birthdays & VIP</title>
+  <meta name="description" content="111ATL is Atlanta's nightlife signal for VIP tables, birthdays, events, host opportunities, and private booking requests." />
+  <meta property="og:title" content="111ATL" />
+  <meta property="og:description" content="Atlanta nightlife. One signal. VIP, birthdays, events, and private bookings." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://111atl.com" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <div class="noise"></div>
+  <header class="site-header">
+    <a class="brand" href="#top" aria-label="111ATL home">
+      <span class="brand-mark">111</span><span class="brand-text">ATL</span>
+    </a>
+    <nav>
+      <a href="#events">Events</a>
+      <a href="#vip">VIP</a>
+      <a href="#birthdays">Birthdays</a>
+      <a href="#hosts">Hosts</a>
+    </nav>
+    <a class="header-cta" href="#vip">Book Now</a>
+  </header>
+
+  <main id="top">
+    <section class="hero section-pad">
+      <div class="hero-copy">
+        <p class="eyebrow">Atlanta nightlife command center</p>
+        <h1>One city. One signal. Every move after dark.</h1>
+        <p class="hero-sub">111ATL routes the city into the right rooms — VIP tables, birthdays, private sections, event alerts, host opportunities, and high-intent nightlife leads.</p>
+        <div class="hero-actions">
+          <a class="btn primary" href="#vip">Request VIP</a>
+          <a class="btn ghost" href="#events">See This Week</a>
+        </div>
+        <div class="trust-row" aria-label="111ATL services">
+          <span>VIP Tables</span>
+          <span>Birthday Packages</span>
+          <span>Guest List</span>
+          <span>Private Bookings</span>
+        </div>
+      </div>
+      <div class="hero-card" aria-label="111ATL booking card">
+        <div class="card-topline">Tonight's Signal</div>
+        <div class="pulse-orb"></div>
+        <h2>Tell us the move.</h2>
+        <p>We lock in the room, route the lead, and keep the night moving.</p>
+        <form class="lead-form mini" data-form-type="general">
+          <label>
+            Name
+            <input name="full_name" autocomplete="name" required placeholder="Your name" />
+          </label>
+          <label>
+            Phone
+            <input name="phone" autocomplete="tel" required placeholder="(404) 000-0000" />
+          </label>
+          <label>
+            What do you need?
+            <select name="lead_type" required>
+              <option value="vip">VIP table</option>
+              <option value="birthday">Birthday</option>
+              <option value="guest_list">Guest list</option>
+              <option value="private_event">Private event</option>
+              <option value="host">Host / promoter info</option>
+            </select>
+          </label>
+          <button class="btn primary full" type="submit">Send Request</button>
+          <p class="form-status" role="status"></p>
+        </form>
+      </div>
+    </section>
+
+    <section class="ticker" aria-label="111ATL highlights">
+      <span>ATLANTA</span><span>VIP</span><span>BIRTHDAYS</span><span>TABLES</span><span>GUEST LIST</span><span>HOSTS</span><span>PRIVATE EVENTS</span><span>111ATL</span>
+    </section>
+
+    <section id="events" class="section-pad split-section">
+      <div>
+        <p class="eyebrow">Event feed</p>
+        <h2>Build the week around the right room.</h2>
+        <p class="section-copy">This section is wired for live Supabase events. Until events are published, the site shows the default 111ATL booking paths.</p>
+      </div>
+      <div class="event-grid" id="eventGrid">
+        <article class="event-card">
+          <p class="event-date">This Week</p>
+          <h3>VIP + Guest List</h3>
+          <p>For tables, birthdays, and last-minute movement.</p>
+          <a href="#vip">Request access</a>
+        </article>
+        <article class="event-card">
+          <p class="event-date">Birthdays</p>
+          <h3>Bring the camera roll.</h3>
+          <p>Birthday packages, sections, bottles, shoutouts, and arrival flow.</p>
+          <a href="#birthdays">Plan birthday</a>
+        </article>
+        <article class="event-card">
+          <p class="event-date">Hosts</p>
+          <h3>Get in the system.</h3>
+          <p>Promoters, hosts, DJs, models, creators, and nightlife connectors.</p>
+          <a href="#hosts">Apply now</a>
+        </article>
+      </div>
+    </section>
+
+    <section id="vip" class="section-pad form-section">
+      <div class="form-copy">
+        <p class="eyebrow">VIP requests</p>
+        <h2>Tables, sections, guest list, and private rooms.</h2>
+        <p>Built for fast routing. Every request becomes a 111ATL lead with source, status, party size, date, and intent.</p>
+      </div>
+      <form class="lead-form panel" data-form-type="booking" data-booking-type="vip_table">
+        <div class="form-grid">
+          <label>Name<input name="full_name" required placeholder="Full name" /></label>
+          <label>Phone<input name="phone" required placeholder="Best number" /></label>
+          <label>Email<input type="email" name="email" placeholder="Email" /></label>
+          <label>Instagram<input name="instagram" placeholder="@handle" /></label>
+          <label>Date<input type="date" name="preferred_date" /></label>
+          <label>Party Size<input type="number" name="party_size" min="1" placeholder="8" /></label>
+          <label>Budget<select name="budget"><option value="">Select</option><option>$500-$1,000</option><option>$1,000-$2,500</option><option>$2,500-$5,000</option><option>$5,000+</option></select></label>
+          <label>Request Type<select name="booking_type"><option value="vip_table">VIP Table</option><option value="guest_list">Guest List</option><option value="private_room">Private Room</option><option value="private_event">Private Event</option></select></label>
+        </div>
+        <label>Notes<textarea name="notes" placeholder="Tell us the occasion, venue preference, arrival time, or anything we should know."></textarea></label>
+        <button class="btn primary" type="submit">Submit VIP Request</button>
+        <p class="form-status" role="status"></p>
+      </form>
+    </section>
+
+    <section id="birthdays" class="section-pad birthday-section">
+      <div class="birthday-card">
+        <p class="eyebrow">Birthday bookings</p>
+        <h2>Make the night feel bigger than a reservation.</h2>
+        <p>Birthday leads are separated from general leads so the team can prioritize package, flyer, section, table, bottles, and arrival details.</p>
+        <form class="lead-form inline" data-form-type="booking" data-booking-type="birthday">
+          <input name="full_name" required placeholder="Birthday name" />
+          <input name="phone" required placeholder="Phone" />
+          <input type="date" name="preferred_date" />
+          <input type="number" name="party_size" min="1" placeholder="Party size" />
+          <button class="btn light" type="submit">Start Birthday Plan</button>
+          <p class="form-status" role="status"></p>
+        </form>
+      </div>
+    </section>
+
+    <section id="hosts" class="section-pad form-section alt">
+      <div class="form-copy">
+        <p class="eyebrow">Host network</p>
+        <h2>Promoters, hosts, DJs, creators, connectors.</h2>
+        <p>Apply once. Get routed into the 111ATL host pipeline with role interest, audience size, experience, and status tracking.</p>
+      </div>
+      <form class="lead-form panel" data-form-type="host">
+        <div class="form-grid">
+          <label>Name<input name="full_name" required placeholder="Full name" /></label>
+          <label>Phone<input name="phone" required placeholder="Best number" /></label>
+          <label>Email<input type="email" name="email" placeholder="Email" /></label>
+          <label>Instagram<input name="instagram" placeholder="@handle" /></label>
+          <label>City<input name="city" value="Atlanta" /></label>
+          <label>Audience Size<input name="audience_size" placeholder="Followers / text list / pull" /></label>
+          <label>Role Interest<select name="role_interest"><option>Host</option><option>Promoter</option><option>DJ</option><option>Creator</option><option>Photographer/Videographer</option><option>Brand Ambassador</option></select></label>
+        </div>
+        <label>Experience<textarea name="experience" placeholder="Where have you hosted, promoted, DJ'd, shot content, or brought people out?"></textarea></label>
+        <button class="btn primary" type="submit">Apply to 111ATL</button>
+        <p class="form-status" role="status"></p>
+      </form>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div>
+      <strong>111ATL</strong>
+      <p>Atlanta nightlife signal. Built for bookings, birthdays, tables, hosts, and fast routing.</p>
+    </div>
+    <a href="#top">Back to top</a>
+  </footer>
+
+  <script src="/script.js"></script>
+</body>
+</html>
