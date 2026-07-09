@@ -5,10 +5,10 @@
   "type": "module",
   "description": "111ATL standalone nightlife booking and lead capture site.",
   "scripts": {
-    "build": "echo '111ATL static site ready'",
+    "build": "rm -rf public && mkdir -p public && cp index.html styles.css script.js public/",
     "start": "echo 'Serve with Vercel or any static server'"
   },
   "engines": {
-    "node": ">=20"
+    "node": "20.x"
   }
 }
