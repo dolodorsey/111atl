@@ -9,6 +9,6 @@
     "start": "echo 'Serve with Vercel or any static server'"
   },
   "engines": {
-    "node": "20.x"
+    "node": "24.x"
   }
 }
