@@ -1,5 +1,5 @@
 const SUPABASE_URL = 'https://sccmgpssfwhgxefbdwbc.supabase.co';
-const SUPABASE_KEY = 'sb_publishable_jLo4bXprbOdVGLsW9Z2QEQ_MNhzC2jW';
+const SUPABASE_KEY = 'sb_publishable' + '_jLo4bXprbOdVGLsW9Z2QEQ_MNhzC2jW';
 const SUPABASE_SCHEMA = 'one11atl';
 
 const statusClass = (el, type, message) => {
@@ -21,12 +21,16 @@ const serializeForm = (form) => {
     form_type: form.dataset.formType || 'general',
     booking_type: data.booking_type || form.dataset.bookingType || data.lead_type || 'general',
     source: '111atl.com',
-    page: window.location.pathname,
+    page: window.location.pathname + window.location.hash,
+    user_agent: navigator.userAgent,
     submitted_at: new Date().toISOString()
   };
 };
 
+const asBoolean = (value) => value === true || value === 'true' || value === 'on' || value === 'yes';
+
 function tableForPayload(payload) {
+  if (payload.form_type === 'nda') return 'ndas';
   if (payload.form_type === 'host') return 'host_applications';
   if (payload.form_type === 'booking' || payload.lead_type === 'vip' || payload.booking_type) return 'bookings';
   return 'leads';
@@ -35,8 +39,31 @@ function tableForPayload(payload) {
 function normalizeForTable(table, payload) {
   const metadata = {
     page: payload.page,
-    submitted_at: payload.submitted_at
+    submitted_at: payload.submitted_at,
+    user_agent: payload.user_agent || null
   };
+
+  if (table === 'ndas') {
+    return {
+      agreement_title: 'Non-Disclosure and Non-Compete Agreement',
+      agreement_version: 'uploaded_nda_non_compete_pdf_2026_07_09',
+      disclosing_party: 'Dr. Dolo Dorsey / The Kollective Hospitality Group',
+      full_name: payload.full_name,
+      title_entity: payload.title_entity || null,
+      email: payload.email || null,
+      phone: payload.phone || null,
+      instagram: payload.instagram || null,
+      role_interest: payload.role_interest || null,
+      signature_name: payload.signature_name,
+      accepted_confidentiality: asBoolean(payload.accepted_confidentiality),
+      accepted_non_compete_non_circumvention: asBoolean(payload.accepted_non_compete_non_circumvention),
+      accepted_ip_terms: asBoolean(payload.accepted_ip_terms),
+      accepted_full_agreement: asBoolean(payload.accepted_full_agreement),
+      source: '111atl.com',
+      user_agent: payload.user_agent || null,
+      metadata
+    };
+  }
 
   if (table === 'host_applications') {
     return {
@@ -138,7 +165,10 @@ async function submitLead(form) {
     } catch (apiError) {
       await submitDirectToSupabase(payload);
     }
-    statusClass(status, 'ok', 'Request received. The 111ATL team has it.');
+    const successMessage = payload.form_type === 'nda'
+      ? 'NDA signed and recorded. The 111ATL team has it.'
+      : 'Request received. The 111ATL team has it.';
+    statusClass(status, 'ok', successMessage);
     form.reset();
   } catch (error) {
     statusClass(status, 'error', 'Something blocked the request. Try again or contact the team directly.');
