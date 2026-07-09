@@ -1,3 +1,7 @@
+const SUPABASE_URL = 'https://sccmgpssfwhgxefbdwbc.supabase.co';
+const SUPABASE_KEY = 'sb_publishable_jLo4bXprbOdVGLsW9Z2QEQ_MNhzC2jW';
+const SUPABASE_SCHEMA = 'one11atl';
+
 const statusClass = (el, type, message) => {
   if (!el) return;
   el.classList.remove('ok', 'error');
@@ -22,10 +26,105 @@ const serializeForm = (form) => {
   };
 };
 
+function tableForPayload(payload) {
+  if (payload.form_type === 'host') return 'host_applications';
+  if (payload.form_type === 'booking' || payload.lead_type === 'vip' || payload.booking_type) return 'bookings';
+  return 'leads';
+}
+
+function normalizeForTable(table, payload) {
+  const metadata = {
+    page: payload.page,
+    submitted_at: payload.submitted_at
+  };
+
+  if (table === 'host_applications') {
+    return {
+      full_name: payload.full_name,
+      phone: payload.phone || null,
+      email: payload.email || null,
+      instagram: payload.instagram || null,
+      city: payload.city || 'Atlanta',
+      audience_size: payload.audience_size || null,
+      role_interest: payload.role_interest || null,
+      experience: payload.experience || null,
+      source: '111atl.com',
+      metadata
+    };
+  }
+
+  if (table === 'bookings') {
+    return {
+      booking_type: payload.booking_type || payload.lead_type || 'vip_table',
+      full_name: payload.full_name,
+      phone: payload.phone || null,
+      email: payload.email || null,
+      instagram: payload.instagram || null,
+      preferred_date: payload.preferred_date || null,
+      party_size: payload.party_size ? Number(payload.party_size) : null,
+      budget: payload.budget || null,
+      notes: payload.notes || payload.message || null,
+      source: '111atl.com',
+      metadata
+    };
+  }
+
+  return {
+    full_name: payload.full_name,
+    phone: payload.phone || null,
+    email: payload.email || null,
+    instagram: payload.instagram || null,
+    lead_type: payload.lead_type || payload.form_type || 'general',
+    event_interest: payload.event_interest || null,
+    party_size: payload.party_size ? Number(payload.party_size) : null,
+    preferred_date: payload.preferred_date || null,
+    message: payload.message || payload.notes || null,
+    source: '111atl.com',
+    metadata
+  };
+}
+
+async function submitDirectToSupabase(payload) {
+  const table = tableForPayload(payload);
+  const record = normalizeForTable(table, payload);
+
+  const response = await fetch(`${SUPABASE_URL}/rest/v1/${table}`, {
+    method: 'POST',
+    headers: {
+      apikey: SUPABASE_KEY,
+      Authorization: `Bearer ${SUPABASE_KEY}`,
+      'Content-Type': 'application/json',
+      Prefer: 'return=minimal',
+      'Content-Profile': SUPABASE_SCHEMA,
+      'Accept-Profile': SUPABASE_SCHEMA
+    },
+    body: JSON.stringify(record)
+  });
+
+  if (!response.ok) {
+    const text = await response.text();
+    throw new Error(text || `Supabase rejected ${table} submission`);
+  }
+
+  return { ok: true, table };
+}
+
+async function submitViaApi(payload) {
+  const response = await fetch('/api/leads', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload)
+  });
+  const result = await response.json().catch(() => ({}));
+  if (!response.ok) throw new Error(result.error || 'API request failed');
+  return result;
+}
+
 async function submitLead(form) {
   const button = form.querySelector('button[type="submit"]');
   const status = form.querySelector('.form-status');
   const original = button ? button.textContent : '';
+  const payload = serializeForm(form);
 
   statusClass(status, null, 'Sending...');
   if (button) {
@@ -34,20 +133,15 @@ async function submitLead(form) {
   }
 
   try {
-    const response = await fetch('/api/leads', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(serializeForm(form))
-    });
-
-    const result = await response.json().catch(() => ({}));
-    if (!response.ok) throw new Error(result.error || 'Request failed');
-
+    try {
+      await submitViaApi(payload);
+    } catch (apiError) {
+      await submitDirectToSupabase(payload);
+    }
     statusClass(status, 'ok', 'Request received. The 111ATL team has it.');
     form.reset();
   } catch (error) {
-    const fallback = 'Request saved on page, but backend needs final Vercel env setup. Text/call the team if urgent.';
-    statusClass(status, 'error', error.message.includes('configured') ? fallback : 'Something blocked the request. Try again or contact the team directly.');
+    statusClass(status, 'error', 'Something blocked the request. Try again or contact the team directly.');
     console.error('111ATL form error:', error);
   } finally {
     if (button) {
@@ -62,7 +156,14 @@ async function loadEvents() {
   if (!grid) return;
 
   try {
-    const response = await fetch('/api/events');
+    const endpoint = `${SUPABASE_URL}/rest/v1/events?status=eq.published&select=id,event_date,title,subtitle,venue,address,start_time,end_time,flyer_url,ticket_url,rsvp_url,sort_order&order=event_date.asc&order=sort_order.asc`;
+    const response = await fetch(endpoint, {
+      headers: {
+        apikey: SUPABASE_KEY,
+        Authorization: `Bearer ${SUPABASE_KEY}`,
+        'Accept-Profile': SUPABASE_SCHEMA
+      }
+    });
     if (!response.ok) return;
     const events = await response.json();
     if (!Array.isArray(events) || events.length === 0) return;
