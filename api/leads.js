@@ -1,3 +1,6 @@
+const FALLBACK_SUPABASE_URL = 'https://sccmgpssfwhgxefbdwbc.supabase.co';
+const FALLBACK_SUPABASE_KEY = 'sb_publishable_jLo4bXprbOdVGLsW9Z2QEQ_MNhzC2jW';
+
 const VIEW_MAP = {
   leads: 'one11atl_leads',
   bookings: 'one11atl_bookings',
@@ -24,16 +27,13 @@ const REQUIRED_FIELDS = {
 };
 
 function getSupabaseConfig() {
-  const url = process.env.SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const url = process.env.SUPABASE_URL
+    || process.env.NEXT_PUBLIC_SUPABASE_URL
+    || FALLBACK_SUPABASE_URL;
   const key = process.env.SUPABASE_SERVICE_ROLE_KEY
     || process.env.SUPABASE_PUBLISHABLE_KEY
-    || process.env.SUPABASE_ANON_KEY;
-
-  if (!url || !key) {
-    const error = new Error('Supabase environment variables are not configured on Vercel.');
-    error.statusCode = 503;
-    throw error;
-  }
+    || process.env.SUPABASE_ANON_KEY
+    || FALLBACK_SUPABASE_KEY;
 
   return { url: url.replace(/\/$/, ''), key };
 }
