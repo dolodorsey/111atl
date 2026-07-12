@@ -3,243 +3,333 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>111ATL | Atlanta Nights, Bookings, Birthdays & VIP</title>
-  <meta name="description" content="111ATL is Atlanta's nightlife signal for VIP tables, birthdays, events, host opportunities, private booking requests, and NDA onboarding." />
-  <meta property="og:title" content="111ATL" />
-  <meta property="og:description" content="Atlanta nightlife. One signal. VIP, birthdays, events, bookings, hosts, and NDA onboarding." />
+  <meta name="theme-color" content="#070707" />
+  <title>111ATL | Atlanta Events, Guest Lists, Birthdays & VIP</title>
+  <meta name="description" content="111ATL is Atlanta's nightlife command center for events, direct RSVP, guest lists, VIP tables, birthdays, sections, hosts, and private bookings." />
+  <meta property="og:title" content="111ATL — Atlanta Moves at 11:11" />
+  <meta property="og:description" content="See what is happening, RSVP directly, reserve a section, plan a birthday, or join the 111ATL network." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://111atl.com" />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/styles.css" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/styles.css?v=2" />
 </head>
 <body>
-  <div class="noise"></div>
-  <header class="site-header">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <div class="page-grain" aria-hidden="true"></div>
+
+  <header class="site-header" id="siteHeader">
     <a class="brand" href="#top" aria-label="111ATL home">
-      <span class="brand-mark">111</span><span class="brand-text">ATL</span>
+      <span class="brand-number">111</span><span class="brand-city">ATL</span>
     </a>
-    <nav>
+
+    <nav class="desktop-nav" aria-label="Main navigation">
       <a href="#events">Events</a>
+      <a href="#rsvp">Guest List</a>
       <a href="#vip">VIP</a>
       <a href="#birthdays">Birthdays</a>
       <a href="#hosts">Hosts</a>
-      <a href="#nda">NDA</a>
     </nav>
-    <a class="header-cta" href="#vip">Book Now</a>
+
+    <div class="header-actions">
+      <a class="button button-small button-outline" href="#vip">Book a Section</a>
+      <button class="menu-button" id="menuButton" type="button" aria-expanded="false" aria-controls="mobileMenu" aria-label="Open menu">
+        <span></span><span></span>
+      </button>
+    </div>
+
+    <nav class="mobile-menu" id="mobileMenu" aria-label="Mobile navigation">
+      <a href="#events">Events</a>
+      <a href="#rsvp">Guest List</a>
+      <a href="#vip">VIP + Sections</a>
+      <a href="#birthdays">Birthdays</a>
+      <a href="#hosts">Hosts + Promoters</a>
+      <a href="#nda">Sign NDA</a>
+    </nav>
   </header>
 
-  <main id="top">
-    <section class="hero section-pad">
+  <main id="main">
+    <section class="hero" id="top">
       <div class="hero-copy">
-        <p class="eyebrow">Atlanta nightlife command center</p>
-        <h1>One city. One signal. Every move after dark.</h1>
-        <p class="hero-sub">111ATL routes the city into the right rooms — VIP tables, birthdays, private sections, event alerts, host opportunities, high-intent nightlife leads, and internal NDA onboarding.</p>
-        <div class="hero-actions">
-          <a class="btn primary" href="#vip">Request VIP</a>
-          <a class="btn ghost" href="#events">See This Week</a>
-          <a class="btn ghost" href="#nda">Sign NDA</a>
+        <p class="kicker"><span class="live-dot"></span> Atlanta nightlife command center</p>
+        <h1>Atlanta moves<br />at <em>11:11.</em></h1>
+        <p class="hero-intro">One place for the flyers, the guest lists, the sections, the birthdays, and the rooms the city is actually moving to.</p>
+        <div class="hero-buttons">
+          <a class="button button-primary" href="#events">See This Week</a>
+          <a class="button button-ghost" href="#rsvp">Get on the List</a>
         </div>
-        <div class="trust-row" aria-label="111ATL services">
-          <span>VIP Tables</span>
-          <span>Birthday Packages</span>
-          <span>Guest List</span>
-          <span>Private Bookings</span>
-          <span>NDA Onboarding</span>
+        <div class="hero-proof" aria-label="111ATL services">
+          <span>Direct RSVP</span><span>VIP Tables</span><span>Birthday Packages</span><span>Private Events</span>
         </div>
       </div>
-      <div class="hero-card" aria-label="111ATL booking card">
-        <div class="card-topline">Tonight's Signal</div>
-        <div class="pulse-orb"></div>
-        <h2>Tell us the move.</h2>
-        <p>We lock in the room, route the lead, and keep the night moving.</p>
-        <form class="lead-form mini" data-form-type="general">
-          <label>
-            Name
-            <input name="full_name" autocomplete="name" required placeholder="Your name" />
-          </label>
-          <label>
-            Phone
-            <input name="phone" autocomplete="tel" required placeholder="(404) 000-0000" />
-          </label>
-          <label>
-            What do you need?
-            <select name="lead_type" required>
-              <option value="vip">VIP table</option>
-              <option value="birthday">Birthday</option>
-              <option value="guest_list">Guest list</option>
-              <option value="private_event">Private event</option>
-              <option value="host">Host / promoter info</option>
-            </select>
-          </label>
-          <button class="btn primary full" type="submit">Send Request</button>
-          <p class="form-status" role="status"></p>
-        </form>
+
+      <div class="hero-visual" id="heroEvent" aria-live="polite">
+        <div class="hero-poster poster-placeholder poster-tone-1">
+          <div class="poster-top"><span>111ATL</span><span>THIS WEEK</span></div>
+          <div class="poster-center">
+            <small>ATLANTA</small>
+            <strong>THE<br />NEXT<br />MOVE</strong>
+          </div>
+          <div class="poster-bottom">Loading the signal...</div>
+        </div>
+        <div class="hero-event-caption">
+          <span class="caption-label">Up next</span>
+          <h2>Atlanta after dark.</h2>
+          <p>Events are loading now.</p>
+        </div>
       </div>
     </section>
 
-    <section class="ticker" aria-label="111ATL highlights">
-      <span>ATLANTA</span><span>VIP</span><span>BIRTHDAYS</span><span>TABLES</span><span>GUEST LIST</span><span>HOSTS</span><span>NDA</span><span>PRIVATE EVENTS</span><span>111ATL</span>
-    </section>
-
-    <section id="events" class="section-pad split-section">
-      <div>
-        <p class="eyebrow">Event feed</p>
-        <h2>Build the week around the right room.</h2>
-        <p class="section-copy">This section is wired for live Supabase events. Until events are published, the site shows the default 111ATL booking paths.</p>
-      </div>
-      <div class="event-grid" id="eventGrid">
-        <article class="event-card">
-          <p class="event-date">This Week</p>
-          <h3>VIP + Guest List</h3>
-          <p>For tables, birthdays, and last-minute movement.</p>
-          <a href="#vip">Request access</a>
-        </article>
-        <article class="event-card">
-          <p class="event-date">Birthdays</p>
-          <h3>Bring the camera roll.</h3>
-          <p>Birthday packages, sections, bottles, shoutouts, and arrival flow.</p>
-          <a href="#birthdays">Plan birthday</a>
-        </article>
-        <article class="event-card">
-          <p class="event-date">Hosts</p>
-          <h3>Get in the system.</h3>
-          <p>Promoters, hosts, DJs, models, creators, and nightlife connectors.</p>
-          <a href="#hosts">Apply now</a>
-        </article>
+    <section class="signal-strip" aria-label="111ATL capabilities">
+      <div class="signal-track">
+        <span>EVENTS</span><i>✦</i><span>GUEST LISTS</span><i>✦</i><span>VIP TABLES</span><i>✦</i><span>BIRTHDAYS</span><i>✦</i><span>HOSTS</span><i>✦</i><span>PRIVATE EVENTS</span><i>✦</i><span>ATLANTA</span><i>✦</i>
+        <span aria-hidden="true">EVENTS</span><i aria-hidden="true">✦</i><span aria-hidden="true">GUEST LISTS</span><i aria-hidden="true">✦</i><span aria-hidden="true">VIP TABLES</span><i aria-hidden="true">✦</i><span aria-hidden="true">BIRTHDAYS</span><i aria-hidden="true">✦</i><span aria-hidden="true">HOSTS</span><i aria-hidden="true">✦</i><span aria-hidden="true">PRIVATE EVENTS</span><i aria-hidden="true">✦</i><span aria-hidden="true">ATLANTA</span><i aria-hidden="true">✦</i>
       </div>
     </section>
 
-    <section id="vip" class="section-pad form-section">
-      <div class="form-copy">
-        <p class="eyebrow">VIP requests</p>
-        <h2>Tables, sections, guest list, and private rooms.</h2>
-        <p>Built for fast routing. Every request becomes a 111ATL lead with source, status, party size, date, and intent.</p>
+    <section class="section events-section" id="events">
+      <div class="section-heading heading-row">
+        <div>
+          <p class="kicker">The calendar</p>
+          <h2>Build the week<br />around the right room.</h2>
+        </div>
+        <p class="section-lede">Flyers, dates, venues, direct RSVP, and ticket links—kept in one live feed.</p>
       </div>
-      <form class="lead-form panel" data-form-type="booking" data-booking-type="vip_table">
+
+      <div class="event-toolbar" aria-label="Filter events">
+        <button class="filter-button is-active" type="button" data-event-filter="all">All Events</button>
+        <button class="filter-button" type="button" data-event-filter="tonight">Tonight</button>
+        <button class="filter-button" type="button" data-event-filter="week">This Week</button>
+        <button class="filter-button" type="button" data-event-filter="later">Coming Up</button>
+      </div>
+
+      <div class="event-grid" id="eventGrid" aria-live="polite">
+        <article class="event-card event-skeleton" aria-hidden="true"></article>
+        <article class="event-card event-skeleton" aria-hidden="true"></article>
+        <article class="event-card event-skeleton" aria-hidden="true"></article>
+      </div>
+      <p class="events-status" id="eventsStatus" role="status"></p>
+    </section>
+
+    <section class="section action-section" aria-labelledby="actionTitle">
+      <div class="section-heading compact-heading">
+        <p class="kicker">Choose the move</p>
+        <h2 id="actionTitle">One tap. Right lane.</h2>
+      </div>
+      <div class="action-grid">
+        <a class="action-card" href="#rsvp"><span>01</span><h3>Guest List</h3><p>RSVP directly for a listed event.</p><b>Get on the list →</b></a>
+        <a class="action-card" href="#vip"><span>02</span><h3>VIP + Sections</h3><p>Tables, bottles, private rooms, and arrival flow.</p><b>Request a section →</b></a>
+        <a class="action-card" href="#birthdays"><span>03</span><h3>Birthday Plans</h3><p>Flyer support, sections, shoutouts, and packages.</p><b>Plan a birthday →</b></a>
+        <a class="action-card" href="#hosts"><span>04</span><h3>Join the Network</h3><p>Hosts, promoters, DJs, creators, and street teams.</p><b>Apply now →</b></a>
+      </div>
+    </section>
+
+    <section class="section form-section rsvp-section" id="rsvp">
+      <div class="form-intro">
+        <p class="kicker">Direct RSVP</p>
+        <h2>Get on the list.<br /><em>Stay in the loop.</em></h2>
+        <p>Select an event above or submit a general guest-list request. Eventbrite remains available when an event requires ticketing, but your 111ATL RSVP stays inside the system.</p>
+        <div class="selected-event" id="selectedEventSummary">
+          <span>Selected event</span>
+          <strong>General 111ATL Guest List</strong>
+          <small>Choose a flyer above to lock in a specific event.</small>
+        </div>
+      </div>
+
+      <form class="lead-form form-panel" data-form-type="booking" data-booking-type="event_rsvp">
+        <input type="hidden" name="booking_type" value="event_rsvp" />
+        <input type="hidden" name="event_id" id="rsvpEventId" />
+        <input type="hidden" name="event_title" id="rsvpEventTitle" value="General 111ATL Guest List" />
+        <input type="hidden" name="preferred_date" id="rsvpEventDate" />
+        <label class="honeypot" aria-hidden="true">Website<input name="company_website" tabindex="-1" autocomplete="off" /></label>
         <div class="form-grid">
-          <label>Name<input name="full_name" required placeholder="Full name" /></label>
+          <label>Full Name<input name="full_name" autocomplete="name" required placeholder="Your name" /></label>
+          <label>Phone<input name="phone" autocomplete="tel" inputmode="tel" required placeholder="(404) 000-0000" /></label>
+          <label>Email<input type="email" name="email" autocomplete="email" placeholder="you@email.com" /></label>
+          <label>Instagram<input name="instagram" autocomplete="off" placeholder="@handle" /></label>
+          <label>Party Size<input type="number" name="party_size" min="1" max="100" value="2" /></label>
+          <label>Arrival Time<select name="budget"><option value="">Select arrival</option><option>Before 11 PM</option><option>11 PM–12 AM</option><option>After 12 AM</option></select></label>
+        </div>
+        <label>Anything we should know?<textarea name="notes" placeholder="Birthday, celebration, guest-list notes, or venue preference."></textarea></label>
+        <label class="consent-row"><input type="checkbox" name="sms_consent" value="true" /> <span>Text me event confirmation and 111ATL updates. Message/data rates may apply.</span></label>
+        <button class="button button-primary button-wide" type="submit">Submit RSVP</button>
+        <p class="form-status" role="status"></p>
+      </form>
+    </section>
+
+    <section class="section form-section dark-panel" id="vip">
+      <div class="form-intro">
+        <p class="kicker">VIP + sections</p>
+        <h2>Reserve the room<br />before the room fills.</h2>
+        <p>Send the date, budget, party size, and occasion. The request routes directly into the 111ATL booking pipeline.</p>
+        <ul class="feature-list">
+          <li>VIP tables + bottle service</li>
+          <li>Private sections + rooms</li>
+          <li>Guest-list coordination</li>
+          <li>Private event inquiries</li>
+        </ul>
+      </div>
+
+      <form class="lead-form form-panel light-panel" data-form-type="booking" data-booking-type="vip_table">
+        <input type="hidden" name="booking_type" value="vip_table" />
+        <label class="honeypot" aria-hidden="true">Website<input name="company_website" tabindex="-1" autocomplete="off" /></label>
+        <div class="form-grid">
+          <label>Full Name<input name="full_name" required placeholder="Full name" /></label>
           <label>Phone<input name="phone" required placeholder="Best number" /></label>
           <label>Email<input type="email" name="email" placeholder="Email" /></label>
           <label>Instagram<input name="instagram" placeholder="@handle" /></label>
           <label>Date<input type="date" name="preferred_date" /></label>
-          <label>Party Size<input type="number" name="party_size" min="1" placeholder="8" /></label>
-          <label>Budget<select name="budget"><option value="">Select</option><option>$500-$1,000</option><option>$1,000-$2,500</option><option>$2,500-$5,000</option><option>$5,000+</option></select></label>
-          <label>Request Type<select name="booking_type"><option value="vip_table">VIP Table</option><option value="guest_list">Guest List</option><option value="private_room">Private Room</option><option value="private_event">Private Event</option></select></label>
+          <label>Party Size<input type="number" name="party_size" min="1" max="250" placeholder="8" /></label>
+          <label>Budget<select name="budget"><option value="">Select budget</option><option>$500–$1,000</option><option>$1,000–$2,500</option><option>$2,500–$5,000</option><option>$5,000+</option></select></label>
+          <label>Request Type<select name="booking_type"><option value="vip_table">VIP Table</option><option value="section">Section</option><option value="guest_list">Guest List</option><option value="private_room">Private Room</option><option value="private_event">Private Event</option></select></label>
         </div>
-        <label>Notes<textarea name="notes" placeholder="Tell us the occasion, venue preference, arrival time, or anything we should know."></textarea></label>
-        <button class="btn primary" type="submit">Submit VIP Request</button>
+        <label>Notes<textarea name="notes" placeholder="Occasion, venue preference, bottles, arrival time, or special requests."></textarea></label>
+        <button class="button button-dark button-wide" type="submit">Request VIP Access</button>
         <p class="form-status" role="status"></p>
       </form>
     </section>
 
-    <section id="birthdays" class="section-pad birthday-section">
-      <div class="birthday-card">
-        <p class="eyebrow">Birthday bookings</p>
-        <h2>Make the night feel bigger than a reservation.</h2>
-        <p>Birthday leads are separated from general leads so the team can prioritize package, flyer, section, table, bottles, and arrival details.</p>
-        <form class="lead-form inline" data-form-type="booking" data-booking-type="birthday">
-          <input name="full_name" required placeholder="Birthday name" />
-          <input name="phone" required placeholder="Phone" />
-          <input type="date" name="preferred_date" />
-          <input type="number" name="party_size" min="1" placeholder="Party size" />
-          <button class="btn light" type="submit">Start Birthday Plan</button>
+    <section class="section birthday-section" id="birthdays">
+      <div class="birthday-banner">
+        <div class="birthday-copy">
+          <p class="kicker">Birthday command center</p>
+          <h2>Your birthday should look<br />bigger than a reservation.</h2>
+          <p>Tell us the date and party size. We route the package, section, flyer support, shoutout, bottles, and arrival details.</p>
+        </div>
+        <form class="lead-form birthday-form" data-form-type="booking" data-booking-type="birthday">
+          <input type="hidden" name="booking_type" value="birthday" />
+          <label class="honeypot" aria-hidden="true">Website<input name="company_website" tabindex="-1" autocomplete="off" /></label>
+          <input name="full_name" required placeholder="Birthday name" aria-label="Birthday name" />
+          <input name="phone" required placeholder="Phone" aria-label="Phone" />
+          <input type="date" name="preferred_date" aria-label="Birthday date" />
+          <input type="number" name="party_size" min="1" placeholder="Party size" aria-label="Party size" />
+          <select name="budget" aria-label="Birthday package budget"><option value="">Budget</option><option>$500–$1,000</option><option>$1,000–$2,500</option><option>$2,500–$5,000</option><option>$5,000+</option></select>
+          <button class="button button-light" type="submit">Start My Birthday Plan</button>
           <p class="form-status" role="status"></p>
         </form>
       </div>
     </section>
 
-    <section id="hosts" class="section-pad form-section alt">
-      <div class="form-copy">
-        <p class="eyebrow">Host network</p>
-        <h2>Promoters, hosts, DJs, creators, connectors.</h2>
-        <p>Apply once. Get routed into the 111ATL host pipeline with role interest, audience size, experience, and status tracking. Anyone receiving internal event info should also sign the NDA.</p>
-        <div class="hero-actions compact-actions">
-          <a class="btn ghost" href="#nda">Sign NDA</a>
-        </div>
+    <section class="section form-section host-section" id="hosts">
+      <div class="form-intro">
+        <p class="kicker">111ATL network</p>
+        <h2>Hosts. Promoters.<br />DJs. Creators.</h2>
+        <p>Apply once and enter the operating system. We track role, audience, experience, event fit, and follow-up status.</p>
+        <a class="text-link" href="#nda">Internal access requires an NDA →</a>
       </div>
-      <form class="lead-form panel" data-form-type="host">
+
+      <form class="lead-form form-panel" data-form-type="host">
+        <label class="honeypot" aria-hidden="true">Website<input name="company_website" tabindex="-1" autocomplete="off" /></label>
         <div class="form-grid">
-          <label>Name<input name="full_name" required placeholder="Full name" /></label>
+          <label>Full Name<input name="full_name" required placeholder="Full name" /></label>
           <label>Phone<input name="phone" required placeholder="Best number" /></label>
           <label>Email<input type="email" name="email" placeholder="Email" /></label>
           <label>Instagram<input name="instagram" placeholder="@handle" /></label>
           <label>City<input name="city" value="Atlanta" /></label>
-          <label>Audience Size<input name="audience_size" placeholder="Followers / text list / pull" /></label>
-          <label>Role Interest<select name="role_interest"><option>Host</option><option>Promoter</option><option>DJ</option><option>Creator</option><option>Photographer/Videographer</option><option>Brand Ambassador</option></select></label>
+          <label>Audience Size<input name="audience_size" placeholder="Followers, text list, or pull" /></label>
+          <label>Role Interest<select name="role_interest"><option>Host</option><option>Promoter</option><option>DJ</option><option>Creator</option><option>Photographer/Videographer</option><option>Brand Ambassador</option><option>Street Team</option></select></label>
         </div>
-        <label>Experience<textarea name="experience" placeholder="Where have you hosted, promoted, DJ'd, shot content, or brought people out?"></textarea></label>
-        <button class="btn primary" type="submit">Apply to 111ATL</button>
+        <label>Experience<textarea name="experience" placeholder="Where have you hosted, promoted, DJ'd, created content, or brought people out?"></textarea></label>
+        <button class="button button-primary button-wide" type="submit">Apply to 111ATL</button>
         <p class="form-status" role="status"></p>
       </form>
     </section>
 
-    <section id="nda" class="section-pad form-section nda-section">
-      <div class="form-copy">
-        <p class="eyebrow">NDA + Non-Compete</p>
-        <h2>Protect the play before we talk business.</h2>
-        <p>This is the 111ATL onboarding version of the uploaded Non-Disclosure and Non-Compete Agreement for Dr. Dolo Dorsey and The Kollective Hospitality Group.</p>
-        <details class="nda-text">
-          <summary>View agreement terms</summary>
-          <div class="legal-copy">
-            <h3>Non-Disclosure and Non-Compete Agreement</h3>
-            <p>This Agreement is made and entered into as of the date of last signature below, by and between Dr. Dolo Dorsey, both in an individual capacity and as Founder &amp; CEO of The Kollective Hospitality Group, including all affiliated brands, ventures, and intellectual property, collectively the Disclosing Party, and the undersigned individual, group, or entity, the Receiving Party.</p>
-            <h4>1. Purpose</h4>
-            <p>The Parties wish to engage in preliminary discussions relating to potential business collaborations, investments, partnerships, or other opportunities. During these discussions, the Disclosing Party may disclose strategic, creative, operational, and financial information that must remain confidential. Access is conditioned upon strict adherence to these terms.</p>
-            <h4>2. Confidential Information</h4>
-            <p>Confidential Information includes business models, methods, trade secrets, unreleased branding concepts, artwork, logos, mascots, marketing strategies, financial forecasts, pitch decks, revenue structures, internal processes, automations, software systems, third-party relationships, supplier/vendor/partner details, client lists, staff structures, compensation strategies, operational plans, and plans related to current or future projects, properties, restaurant concepts, product lines, or expansions under The Kollective.</p>
-            <h4>3. Receiving Party Obligations</h4>
-            <p>The Receiving Party agrees to treat all Confidential Information as strictly confidential, not disclose it without prior written consent, not replicate, reverse engineer, or use it for personal or commercial gain, limit access to bound need-to-know parties, and notify the Disclosing Party immediately of any breach, suspected breach, or legal requirement compelling disclosure.</p>
-            <h4>4. Non-Compete and Non-Circumvention</h4>
-            <p>For two years from the Effective Date, the Receiving Party shall not compete directly or indirectly with any disclosed business model, property, concept, or entity under The Kollective Hospitality Group in the same vertical or market segment; circumvent the Disclosing Party by contacting vendors, clients, employees, investors, or partners introduced by the Disclosing Party; repurpose any concept, idea, branding, system, or strategy received under this Agreement; or collaborate with third parties to execute a similar or derivative model discussed during confidential interactions.</p>
-            <h4>5. Intellectual Property Ownership</h4>
-            <p>All creative and strategic assets, including brand identities, logos, names, mascots, menus, events, digital products, visual presentations, content, business plans, proprietary frameworks, and verbal or written ideas disclosed during working sessions or strategic discussions remain the sole intellectual property of Dr. Dorsey and The Kollective. No rights or licenses are granted unless explicitly stated in writing.</p>
-            <h4>6. Return or Destruction of Materials</h4>
-            <p>Upon request, the Receiving Party agrees to return all physical materials and digital copies, permanently delete files, passwords, and records, and certify destruction or return if requested.</p>
-            <h4>7. No Partnership Created</h4>
-            <p>This Agreement does not create a partnership, joint venture, employment agreement, or agency relationship and is not a commitment to enter into any transaction.</p>
-            <h4>8. Remedies for Breach</h4>
-            <p>The Receiving Party acknowledges breach may cause irreparable harm and that the Disclosing Party may seek injunctive relief and all remedies available at law or equity, including attorney fees and costs.</p>
-            <h4>9. Governing Law and Jurisdiction</h4>
-            <p>This Agreement is governed by Texas law. Disputes shall be resolved exclusively in state or federal courts located in Harris County, Texas.</p>
-            <h4>10. Term and Survival</h4>
-            <p>This Agreement remains in effect for two years from the Effective Date or until terminated in writing by mutual consent. Obligations regarding confidentiality, non-circumvention, and intellectual property survive termination.</p>
-            <h4>11. Entire Agreement</h4>
-            <p>This document constitutes the entire agreement between the Parties regarding the subject matter and supersedes prior communications. Amendments must be in writing and signed by both Parties.</p>
-          </div>
-        </details>
+    <section class="section alerts-section">
+      <div>
+        <p class="kicker">Do not miss the move</p>
+        <h2>Get the weekly signal.</h2>
+        <p>Event drops, guest-list windows, birthday offers, and last-minute room changes.</p>
       </div>
-      <form class="lead-form panel" data-form-type="nda">
+      <form class="lead-form alert-form" data-form-type="general">
+        <input type="hidden" name="lead_type" value="event_alerts" />
+        <label class="honeypot" aria-hidden="true">Website<input name="company_website" tabindex="-1" autocomplete="off" /></label>
+        <input name="full_name" required placeholder="Name" aria-label="Name" />
+        <input name="phone" required placeholder="Mobile number" aria-label="Mobile number" />
+        <input type="email" name="email" placeholder="Email (optional)" aria-label="Email" />
+        <input type="hidden" name="sms_consent" value="true" />
+        <button class="button button-light" type="submit">Join the List</button>
+        <p class="form-status" role="status"></p>
+      </form>
+    </section>
+
+    <section class="section nda-section" id="nda">
+      <div class="section-heading heading-row">
+        <div>
+          <p class="kicker">Internal onboarding</p>
+          <h2>Protect the play.</h2>
+        </div>
+        <p class="section-lede">Hosts, promoters, partners, vendors, staff, creators, and collaborators receiving internal information must sign the 111ATL NDA.</p>
+      </div>
+      <details class="nda-disclosure">
+        <summary>Review NDA + Non-Compete terms</summary>
+        <div class="legal-copy">
+          <h3>Non-Disclosure and Non-Compete Agreement</h3>
+          <p>This agreement is between Dr. Dolo Dorsey, individually and as Founder &amp; CEO of The Kollective Hospitality Group, including affiliated brands, ventures, and intellectual property, and the receiving party signing below.</p>
+          <h4>Confidentiality</h4><p>Confidential information includes business models, unreleased branding, artwork, marketing strategy, financial information, systems, automations, vendor and partner details, client lists, staffing, compensation, operational plans, properties, products, and expansion plans.</p>
+          <h4>Non-Compete + Non-Circumvention</h4><p>For two years, the receiving party agrees not to compete with, circumvent, copy, repurpose, or help another party execute a disclosed business model, concept, relationship, or derivative strategy.</p>
+          <h4>Intellectual Property</h4><p>All disclosed creative, strategic, operational, and brand assets remain the sole property of Dr. Dolo Dorsey and The Kollective Hospitality Group unless a separate written agreement states otherwise.</p>
+          <h4>Remedies + Governing Law</h4><p>Breach may result in injunctive relief and other legal remedies. The agreement is governed by Texas law with exclusive jurisdiction in Harris County, Texas.</p>
+          <p class="legal-note">The signed record stores the agreement version, timestamp, acknowledgements, contact details, signature, source, user agent, and available request metadata.</p>
+        </div>
+      </details>
+
+      <form class="lead-form form-panel nda-form" data-form-type="nda">
+        <label class="honeypot" aria-hidden="true">Website<input name="company_website" tabindex="-1" autocomplete="off" /></label>
         <div class="form-grid">
-          <label>Name<input name="full_name" required placeholder="Legal full name" /></label>
-          <label>Title / Entity<input name="title_entity" placeholder="Title or company/entity" /></label>
+          <label>Legal Full Name<input name="full_name" required placeholder="Legal full name" /></label>
+          <label>Title / Entity<input name="title_entity" placeholder="Title or company" /></label>
           <label>Email<input type="email" name="email" required placeholder="Email" /></label>
           <label>Phone<input name="phone" required placeholder="Phone" /></label>
           <label>Instagram<input name="instagram" placeholder="@handle" /></label>
           <label>Role Interest<select name="role_interest"><option>Host</option><option>Promoter</option><option>DJ</option><option>Creator</option><option>Vendor</option><option>Staff</option><option>Partner</option><option>Investor</option><option>Other</option></select></label>
-          <label>Typed Signature<input name="signature_name" required placeholder="Type your legal name" /></label>
+          <label class="full-column">Typed Signature<input name="signature_name" required placeholder="Type your legal name" /></label>
         </div>
         <div class="agreement-checks">
-          <label class="checkbox-label"><input type="checkbox" name="accepted_confidentiality" value="true" required /> I agree to keep all Confidential Information strictly confidential.</label>
-          <label class="checkbox-label"><input type="checkbox" name="accepted_non_compete_non_circumvention" value="true" required /> I agree to the non-compete and non-circumvention terms.</label>
-          <label class="checkbox-label"><input type="checkbox" name="accepted_ip_terms" value="true" required /> I agree that disclosed creative and strategic assets remain the property of Dr. Dorsey and The Kollective.</label>
-          <label class="checkbox-label"><input type="checkbox" name="accepted_full_agreement" value="true" required /> I have read and accept the full NDA / Non-Compete Agreement above.</label>
+          <label><input type="checkbox" name="accepted_confidentiality" value="true" required /><span>I agree to keep confidential information private.</span></label>
+          <label><input type="checkbox" name="accepted_non_compete_non_circumvention" value="true" required /><span>I accept the non-compete and non-circumvention terms.</span></label>
+          <label><input type="checkbox" name="accepted_ip_terms" value="true" required /><span>I acknowledge ownership of disclosed intellectual property.</span></label>
+          <label><input type="checkbox" name="accepted_full_agreement" value="true" required /><span>I have reviewed and accept the full agreement.</span></label>
         </div>
-        <button class="btn primary" type="submit">Sign 111ATL NDA</button>
+        <button class="button button-primary button-wide" type="submit">Sign 111ATL NDA</button>
         <p class="form-status" role="status"></p>
       </form>
     </section>
   </main>
 
   <footer class="site-footer">
-    <div>
-      <strong>111ATL</strong>
-      <p>Atlanta nightlife signal. Built for bookings, birthdays, tables, hosts, NDA onboarding, and fast routing.</p>
-    </div>
-    <a href="#top">Back to top</a>
+    <div class="footer-brand"><span>111</span>ATL</div>
+    <div><strong>Atlanta's nightlife signal.</strong><p>Events, guest lists, VIP, birthdays, hosts, and private bookings.</p></div>
+    <div class="footer-links"><a href="#events">Events</a><a href="#vip">Bookings</a><a href="#hosts">Network</a><a href="#nda">NDA</a></div>
+    <a class="back-top" href="#top" aria-label="Back to top">↑</a>
   </footer>
 
-  <script src="/script.js"></script>
+  <nav class="mobile-dock" aria-label="Quick actions">
+    <a href="#events"><span>Events</span></a>
+    <a href="#rsvp"><span>RSVP</span></a>
+    <a class="dock-primary" href="#vip"><span>Book VIP</span></a>
+  </nav>
+
+  <dialog class="event-dialog" id="eventDialog">
+    <button class="dialog-close" id="dialogClose" type="button" aria-label="Close event details">×</button>
+    <div class="dialog-poster" id="dialogPoster"></div>
+    <div class="dialog-content">
+      <p class="kicker" id="dialogDate">Upcoming event</p>
+      <h2 id="dialogTitle">111ATL Event</h2>
+      <p id="dialogSubtitle"></p>
+      <dl class="event-facts">
+        <div><dt>Venue</dt><dd id="dialogVenue">Atlanta</dd></div>
+        <div><dt>Time</dt><dd id="dialogTime">TBA</dd></div>
+      </dl>
+      <div class="dialog-actions">
+        <button class="button button-primary" id="dialogRsvp" type="button">RSVP Direct</button>
+        <a class="button button-outline" id="dialogTicket" href="#" target="_blank" rel="noopener" hidden>Eventbrite / Tickets</a>
+      </div>
+    </div>
+  </dialog>
+
+  <script src="/script.js?v=2" defer></script>
 </body>
 </html>
