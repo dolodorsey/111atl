@@ -1,14 +1,6 @@
 {
-  "name": "111atl",
-  "version": "4.2.0",
-  "private": true,
-  "type": "module",
-  "description": "111ATL public access hub for current Rose on Piedmont programming, Atlanta focus brands, forms, bookings, products, and Hakuna Matata.",
-  "scripts": {
-    "build": "rm -rf public && mkdir -p public && cp index.html styles.css script.js hero-data-*.js public/ && node patch-current-status.mjs",
-    "start": "echo 'Serve with Vercel or any static server'"
-  },
-  "engines": {
-    "node": "24.x"
-  }
+  "name":"111atl","version":"8.0.0","private":true,"type":"module",
+  "description":"111ATL public Atlanta access hub for current companies, products, events, applications, partnerships and direct destinations.",
+  "scripts":{"build":"rm -rf public && mkdir -p public && cp index.html styles.css script.js company.html company.js nda.html public/","start":"echo 'Serve with Vercel or any static server'"},
+  "engines":{"node":"24.x"}
 }
