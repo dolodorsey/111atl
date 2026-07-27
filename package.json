@@ -3,10 +3,12 @@
   "version": "3.0.0",
   "private": true,
   "type": "module",
-  "description": "111ATL public gateway for Atlanta events, brands, access, products, and opportunities.",
+  "description": "111ATL public access hub for current events, official entities, forms, bookings, and the Hakuna Matata book.",
   "scripts": {
-    "build": "rm -rf public && mkdir -p public && cp index.html hero.css styles.css script.js public/",
+    "build": "rm -rf public && mkdir -p public && cp index.html styles.css script.js public/",
     "start": "echo 'Serve with Vercel or any static server'"
   },
-  "engines": {"node": "24.x"}
+  "engines": {
+    "node": "24.x"
+  }
 }
