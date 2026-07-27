@@ -1,343 +1,47 @@
-const state = {
-  events: [],
-  filter: 'all',
-  selectedEvent: null
-};
-
-const qs = (selector, scope = document) => scope.querySelector(selector);
-const qsa = (selector, scope = document) => [...scope.querySelectorAll(selector)];
-
-function escapeHtml(value = '') {
-  return String(value).replace(/[&<>'"]/g, (char) => ({
-    '&': '&amp;',
-    '<': '&lt;',
-    '>': '&gt;',
-    "'": '&#039;',
-    '"': '&quot;'
-  }[char]));
-}
-
-function safeUrl(value = '') {
-  try {
-    const url = new URL(value, window.location.origin);
-    if (!['http:', 'https:'].includes(url.protocol)) return '';
-    return url.href;
-  } catch {
-    return '';
-  }
-}
-
-function formatEventDate(dateValue, options = {}) {
-  if (!dateValue) return 'Date TBA';
-  const date = new Date(`${dateValue}T12:00:00`);
-  return date.toLocaleDateString('en-US', {
-    weekday: options.short ? 'short' : 'long',
-    month: options.short ? 'short' : 'long',
-    day: 'numeric'
-  });
-}
-
-function eventTime(event) {
-  if (!event.start_time && !event.end_time) return 'Time TBA';
-  return [event.start_time, event.end_time].filter(Boolean).join(' – ');
-}
-
-function daysFromToday(dateValue) {
-  if (!dateValue) return Number.POSITIVE_INFINITY;
-  const today = new Date();
-  today.setHours(0, 0, 0, 0);
-  const target = new Date(`${dateValue}T00:00:00`);
-  return Math.round((target - today) / 86400000);
-}
-
-function eventMatchesFilter(event, filter) {
-  const days = daysFromToday(event.event_date);
-  if (filter === 'tonight') return days === 0;
-  if (filter === 'week') return days >= 0 && days <= 7;
-  if (filter === 'later') return days > 7;
-  return true;
-}
-
-function eventPoster(event, index, className = '') {
-  const flyer = safeUrl(event.flyer_url);
-  if (flyer) {
-    return `<div class="event-poster ${className}"><img src="${escapeHtml(flyer)}" alt="${escapeHtml(event.title || '111ATL event')} flyer" loading="lazy" /></div>`;
-  }
-
-  const tone = (index % 5) + 1;
-  return `
-    <div class="event-poster poster-placeholder poster-tone-${tone} ${className}">
-      <div class="poster-top"><span>111ATL</span><span>${escapeHtml(formatEventDate(event.event_date, { short: true }))}</span></div>
-      <div class="poster-center"><small>${escapeHtml(event.venue || 'ATLANTA')}</small><strong>${escapeHtml(event.title || '111ATL EVENT')}</strong></div>
-      <div class="poster-bottom">${escapeHtml(event.start_time || 'ATLANTA AFTER DARK')}</div>
-    </div>`;
-}
-
-function eventCard(event, index) {
-  const ticket = safeUrl(event.ticket_url);
-  const hasTicket = Boolean(ticket);
-  return `
-    <article class="event-card" data-event-id="${escapeHtml(event.id || '')}">
-      <button class="event-card-open" type="button" data-open-event="${escapeHtml(event.id || '')}" aria-label="View ${escapeHtml(event.title || 'event')} details">
-        ${eventPoster(event, index)}
-      </button>
-      <div class="event-card-body">
-        <div class="event-meta"><span>${escapeHtml(formatEventDate(event.event_date, { short: true }))}</span><span>${escapeHtml(event.start_time || 'TBA')}</span></div>
-        <h3>${escapeHtml(event.title || '111ATL Event')}</h3>
-        <p>${escapeHtml(event.subtitle || event.venue || 'Atlanta nightlife, guest list, and VIP access.')}</p>
-        <div class="event-card-footer">
-          <button class="event-rsvp-link" type="button" data-rsvp-event="${escapeHtml(event.id || '')}">RSVP Direct</button>
-          ${hasTicket ? `<a href="${escapeHtml(ticket)}" target="_blank" rel="noopener">Tickets ↗</a>` : `<button type="button" data-open-event="${escapeHtml(event.id || '')}">Details →</button>`}
-        </div>
-      </div>
-    </article>`;
-}
-
-function renderEvents() {
-  const grid = qs('#eventGrid');
-  const status = qs('#eventsStatus');
-  if (!grid) return;
-
-  const filtered = state.events.filter((event) => eventMatchesFilter(event, state.filter));
-  if (!filtered.length) {
-    grid.innerHTML = `
-      <div class="empty-events">
-        <span>11:11</span>
-        <h3>No events in this view yet.</h3>
-        <p>Switch filters or join the weekly signal for the next event drop.</p>
-        <a class="button button-outline" href="#rsvp">Join the guest list</a>
-      </div>`;
-    status.textContent = state.events.length ? 'No events match this filter.' : 'The live event feed is being updated.';
-    return;
-  }
-
-  grid.innerHTML = filtered.map(eventCard).join('');
-  status.textContent = `${filtered.length} upcoming event${filtered.length === 1 ? '' : 's'} loaded.`;
-}
-
-function setHeroEvent(event, index = 0) {
-  const hero = qs('#heroEvent');
-  if (!hero || !event) return;
-
-  hero.innerHTML = `
-    ${eventPoster(event, index, 'hero-poster')}
-    <div class="hero-event-caption">
-      <span class="caption-label">Up next · ${escapeHtml(formatEventDate(event.event_date, { short: true }))}</span>
-      <h2>${escapeHtml(event.title || '111ATL Event')}</h2>
-      <p>${escapeHtml([event.venue, eventTime(event)].filter(Boolean).join(' · '))}</p>
-      <div class="caption-actions">
-        <button type="button" data-rsvp-event="${escapeHtml(event.id || '')}">RSVP</button>
-        <button type="button" data-open-event="${escapeHtml(event.id || '')}">View details</button>
-      </div>
-    </div>`;
-}
-
-async function loadEvents() {
-  const status = qs('#eventsStatus');
-  try {
-    const response = await fetch('/api/events', { headers: { Accept: 'application/json' } });
-    const result = await response.json().catch(() => ({}));
-    if (!response.ok) throw new Error(result.error || 'Event feed unavailable');
-    state.events = Array.isArray(result.events) ? result.events : [];
-    renderEvents();
-    if (state.events[0]) setHeroEvent(state.events[0]);
-  } catch (error) {
-    console.error('111ATL event feed error:', error);
-    state.events = [];
-    renderEvents();
-    if (status) status.textContent = 'The event feed could not load. Direct RSVP and booking forms are still available.';
-  }
-}
-
-function findEvent(eventId) {
-  return state.events.find((event) => String(event.id) === String(eventId));
-}
-
-function selectEvent(event) {
-  state.selectedEvent = event || null;
-  const title = event?.title || 'General 111ATL Guest List';
-  const date = event?.event_date || '';
-  const id = event?.id || '';
-
-  qs('#rsvpEventId').value = id;
-  qs('#rsvpEventTitle').value = title;
-  qs('#rsvpEventDate').value = date;
-
-  const summary = qs('#selectedEventSummary');
-  if (summary) {
-    summary.innerHTML = event
-      ? `<span>Selected event</span><strong>${escapeHtml(title)}</strong><small>${escapeHtml(formatEventDate(date))} · ${escapeHtml(event.venue || 'Atlanta')}</small>`
-      : '<span>Selected event</span><strong>General 111ATL Guest List</strong><small>Choose a flyer above to lock in a specific event.</small>';
-  }
-}
-
-function openEventDialog(event) {
-  const dialog = qs('#eventDialog');
-  if (!dialog || !event) return;
-
-  qs('#dialogDate').textContent = formatEventDate(event.event_date);
-  qs('#dialogTitle').textContent = event.title || '111ATL Event';
-  qs('#dialogSubtitle').textContent = event.subtitle || 'Guest list, VIP, and booking requests are available through 111ATL.';
-  qs('#dialogVenue').textContent = [event.venue, event.address].filter(Boolean).join(' · ') || 'Atlanta';
-  qs('#dialogTime').textContent = eventTime(event);
-  qs('#dialogPoster').innerHTML = eventPoster(event, state.events.indexOf(event), 'dialog-poster-inner');
-
-  const ticketLink = qs('#dialogTicket');
-  const ticket = safeUrl(event.ticket_url);
-  ticketLink.hidden = !ticket;
-  ticketLink.href = ticket || '#';
-  qs('#dialogRsvp').dataset.rsvpEvent = event.id || '';
-
-  if (typeof dialog.showModal === 'function') dialog.showModal();
-  else dialog.setAttribute('open', '');
-}
-
-function closeEventDialog() {
-  const dialog = qs('#eventDialog');
-  if (!dialog) return;
-  if (typeof dialog.close === 'function') dialog.close();
-  else dialog.removeAttribute('open');
-}
-
-function scrollToRsvp(event) {
-  selectEvent(event);
-  closeEventDialog();
-  qs('#rsvp')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  window.setTimeout(() => qs('#rsvp input[name="full_name"]')?.focus(), 500);
-}
-
-function serializeForm(form) {
-  const data = Object.fromEntries(new FormData(form).entries());
-  const params = new URLSearchParams(window.location.search);
-
-  Object.keys(data).forEach((key) => {
-    if (typeof data[key] === 'string') data[key] = data[key].trim();
-    if (data[key] === '') delete data[key];
-  });
-
-  return {
-    ...data,
-    form_type: form.dataset.formType || 'general',
-    booking_type: data.booking_type || form.dataset.bookingType || data.lead_type || undefined,
-    source: '111atl.com',
-    page: window.location.pathname + window.location.hash,
-    referrer: document.referrer || null,
-    utm_source: params.get('utm_source'),
-    utm_medium: params.get('utm_medium'),
-    utm_campaign: params.get('utm_campaign'),
-    submitted_at: new Date().toISOString()
-  };
-}
-
-function setFormStatus(form, type, message) {
-  const status = qs('.form-status', form);
-  if (!status) return;
-  status.classList.remove('is-success', 'is-error');
-  if (type) status.classList.add(type);
-  status.textContent = message;
-}
-
-async function submitForm(form) {
-  const button = qs('button[type="submit"]', form);
-  const originalText = button?.textContent || '';
-  const payload = serializeForm(form);
-
-  setFormStatus(form, '', 'Sending...');
-  if (button) {
-    button.disabled = true;
-    button.textContent = 'Sending...';
-  }
-
-  try {
-    const response = await fetch('/api/leads', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload)
-    });
-    const result = await response.json().catch(() => ({}));
-    if (!response.ok) throw new Error(result.error || 'Request failed');
-
-    const success = payload.form_type === 'nda'
-      ? 'NDA signed and recorded. The 111ATL team has it.'
-      : payload.booking_type === 'event_rsvp'
-        ? 'RSVP received. The 111ATL team has your request.'
-        : 'Request received. The 111ATL team has it.';
-
-    setFormStatus(form, 'is-success', success);
-    form.reset();
-    if (payload.booking_type === 'event_rsvp') selectEvent(null);
-  } catch (error) {
-    console.error('111ATL form error:', error);
-    setFormStatus(form, 'is-error', error.message || 'Something blocked the request. Please try again.');
-  } finally {
-    if (button) {
-      button.disabled = false;
-      button.textContent = originalText;
-    }
-  }
-}
-
-function setMinimumDates() {
-  const today = new Date().toISOString().slice(0, 10);
-  qsa('input[type="date"]').forEach((input) => {
-    if (!input.min) input.min = today;
-  });
-}
-
-function bindInteractions() {
-  document.addEventListener('click', (event) => {
-    const openButton = event.target.closest('[data-open-event]');
-    if (openButton) {
-      const selected = findEvent(openButton.dataset.openEvent);
-      if (selected) openEventDialog(selected);
-      return;
-    }
-
-    const rsvpButton = event.target.closest('[data-rsvp-event]');
-    if (rsvpButton) {
-      const selected = findEvent(rsvpButton.dataset.rsvpEvent);
-      scrollToRsvp(selected);
-      return;
-    }
-
-    const filterButton = event.target.closest('[data-event-filter]');
-    if (filterButton) {
-      state.filter = filterButton.dataset.eventFilter;
-      qsa('[data-event-filter]').forEach((button) => button.classList.toggle('is-active', button === filterButton));
-      renderEvents();
-    }
-  });
-
-  qsa('.lead-form').forEach((form) => {
-    form.addEventListener('submit', (event) => {
-      event.preventDefault();
-      submitForm(form);
-    });
-  });
-
-  const menuButton = qs('#menuButton');
-  const mobileMenu = qs('#mobileMenu');
-  menuButton?.addEventListener('click', () => {
-    const open = menuButton.getAttribute('aria-expanded') === 'true';
-    menuButton.setAttribute('aria-expanded', String(!open));
-    mobileMenu?.classList.toggle('is-open', !open);
-  });
-  qsa('a', mobileMenu).forEach((link) => link.addEventListener('click', () => {
-    menuButton?.setAttribute('aria-expanded', 'false');
-    mobileMenu?.classList.remove('is-open');
-  }));
-
-  qs('#dialogClose')?.addEventListener('click', closeEventDialog);
-  qs('#eventDialog')?.addEventListener('click', (event) => {
-    if (event.target === event.currentTarget) closeEventDialog();
-  });
-
-  const header = qs('#siteHeader');
-  const updateHeader = () => header?.classList.toggle('is-scrolled', window.scrollY > 20);
-  updateHeader();
-  window.addEventListener('scroll', updateHeader, { passive: true });
-}
-
-setMinimumDates();
-bindInteractions();
-loadEvents();
+const $=(s,r=document)=>r.querySelector(s),$$=(s,r=document)=>[...r.querySelectorAll(s)];
+const TYPES=[
+['inquiry','111atl.inquiry','General Inquiry','Not sure where to start? We route it.',[]],
+['applicant','111atl.applicant','General Application','Apply for an operating opportunity.',[]],
+['hiring','111atl.hiring','Hiring Inquiry','Employment and contractor interest.',[]],
+['intern','111atl.intern','Intern Application','Intern across a Kollective division.',[]],
+['host','111atl.host','Host / Influencer','Host, promote, create, or represent.',[]],
+['artist','111atl.artist','Artist Application','Visual, performing, DJ, or creative.',[]],
+['rsvp','111atl.rsvp','Event RSVP','Join the list for a current event.',['date','party']],
+['table','111atl.table','Table / Section','VIP table, section, or birthday package.',['date','party','budget']],
+['group','111atl.group','Group Pricing','Group tickets, reservations, or access.',['date','party','budget']],
+['consultation','111atl.consultation','Consultation','Request strategic or brand guidance.',['date','budget']],
+['partner','111atl.partner','Partner Inquiry','Business, venue, media, or strategic.',['budget']],
+['sponsor','111atl.sponsor','Sponsor Inquiry','Presenting partner or brand activation.',['date','budget']],
+['vendor','111atl.vendor','Vendor Application','Food, merchandise, service, or activation.',['date']],
+['volunteer','111atl.volunteer','Volunteer Application','Join an event or community initiative.',['date']],
+['onboarding','111atl.onboarding','Approved Onboarding','Team, partner, vendor, or contractor.',[]],
+['nda','111atl.nda','NDA Agreement','Protect confidential access and IP.',[]],
+['book','111atl.book','Hakuna Matata Book','Early access, events, and bulk orders.',['party','budget']]
+].map(([key,formKey,title,short,groups])=>({key,formKey,title,short,groups}));
+const state={events:[],entities:[],eventFilter:'all',entityFilter:'all',search:'',selectedEvent:null,selectedForm:'inquiry'};
+const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]));
+const safe=v=>{try{const u=new URL(v,location.origin);return ['http:','https:'].includes(u.protocol)?u.href:''}catch{return''}};
+const dayKey=(d=new Date())=>new Intl.DateTimeFormat('en-CA',{timeZone:'America/New_York',year:'numeric',month:'2-digit',day:'2-digit'}).format(d);
+const ordinal=v=>{const [y,m,d]=String(v||'9999-12-31').split('-').map(Number);return Date.UTC(y,m-1,d)/864e5};
+const days=v=>ordinal(v)-ordinal(dayKey());
+const fmt=v=>{if(!v)return'Date TBA';const[y,m,d]=v.split('-').map(Number);return new Intl.DateTimeFormat('en-US',{timeZone:'America/New_York',weekday:'long',month:'long',day:'numeric',year:'numeric'}).format(new Date(Date.UTC(y,m-1,d,16)))};
+const time=e=>[e.start_time,e.end_time].filter(Boolean).join(' – ')||'Time TBA';
+const type=k=>TYPES.find(x=>x.key===k||x.formKey===k)||TYPES[0];
+function poster(e,i=0){const f=safe(e.flyer_url);if(f)return`<img src="${esc(f)}" alt="${esc(e.title||'Event flyer')}" loading="lazy">`;return`<div class="generated-poster poster-${i%4}"><span>111ATL PRESENTS</span><strong>${esc(e.title||'ATLANTA')}</strong><small>${esc(e.subtitle||fmt(e.event_date))}</small><b>${esc((e.venue||'ATLANTA').toUpperCase())}</b></div>`}
+function renderEvents(){const now=dayKey(),list=state.events.filter(e=>e.event_date>=now).filter(e=>{const d=days(e.event_date);return state.eventFilter==='all'||(state.eventFilter==='tonight'&&d===0)||(state.eventFilter==='week'&&d>=0&&d<=7)||(state.eventFilter==='later'&&d>7)});$('#eventCount').textContent=state.events.length||'Live';$('#eventsStatus').textContent=list.length?`${list.length} current event${list.length===1?'':'s'}`:'No events in this filter';$('#eventGrid').innerHTML=list.length?list.map((e,i)=>`<article class="event-card"><button class="event-poster" data-open-event="${esc(e.id)}" aria-label="Open ${esc(e.title)}">${poster(e,i)}</button><div class="event-card-body"><p>${esc(fmt(e.event_date))}</p><h3>${esc(e.title)}</h3><span>${esc(e.subtitle||'111ATL experience')}</span><dl><div><dt>Venue</dt><dd>${esc(e.venue||'Atlanta')}</dd></div><div><dt>Time</dt><dd>${esc(time(e))}</dd></div></dl><div class="card-actions"><button class="button button-primary" data-rsvp-event="${esc(e.id)}">RSVP</button>${safe(e.ticket_url)?`<a class="button button-dark" href="${esc(safe(e.ticket_url))}" target="_blank" rel="noopener">Tickets ↗</a>`:''}</div></div></article>`).join(''):`<div class="empty-state"><strong>No current events here.</strong><p>Choose another filter or check back for the next Atlanta move.</p></div>`;renderHeroEvent()}
+function renderHeroEvent(){const e=state.events.find(x=>x.event_date>=dayKey()),box=$('#heroEvent');if(!box)return;if(!e){box.innerHTML='<div class="mini-poster"><span>UP NEXT</span><strong>ATLANTA</strong><small>Calendar updating</small></div><div><span class="panel-label">Live calendar</span><h3>New dates coming</h3><p>Only active events appear.</p></div>';return}box.innerHTML=`<div class="mini-poster"><span>UP NEXT</span><strong>${esc((e.title||'ATLANTA').slice(0,18))}</strong><small>${esc(fmt(e.event_date))}</small></div><div><span class="panel-label">Live calendar</span><h3>${esc(e.title)}</h3><p>${esc(e.venue||'Atlanta')} · ${esc(time(e))}</p></div>`}
+function renderEntities(){const q=state.search.toLowerCase(),list=state.entities.filter(e=>(state.entityFilter==='all'||e.category===state.entityFilter)&&(!q||`${e.brand_label} ${e.description} ${e.category}`.toLowerCase().includes(q)));$('#entityGrid').innerHTML=list.map(e=>`<article class="entity-card ${esc(e.metadata?.theme||'')}"><div class="logo-stage"><img src="${esc(e.logo_url)}" alt="${esc(e.brand_label)} logo" loading="lazy" onerror="this.remove();this.parentElement.classList.add('logo-missing')"><span>${esc(e.brand_label)}</span></div><div class="entity-card-body"><small>${esc(e.category)}</small><h3>${esc(e.brand_label)}</h3><p>${esc(e.description||'Official 111ATL entity.')}</p><div class="entity-actions">${safe(e.site_url)?`<a href="${esc(safe(e.site_url))}" target="_blank" rel="noopener">Official Site ↗</a>`:''}<button data-form-preset="${esc(e.form_key||'inquiry')}" data-brand-form="${esc(e.brand_key)}">Contact</button></div></div></article>`).join('');$('#entityStatus').textContent=list.length?`${list.length} official entit${list.length===1?'y':'ies'} shown`:'No matching entities.';populateBrands()}
+function renderTypes(){const box=$('#formLaneGrid'),select=$('#requestTypeSelect');box.innerHTML=TYPES.map((t,i)=>`<button type="button" data-form-preset="${t.key}"><span>${String(i+1).padStart(2,'0')}</span><b>${esc(t.title)}</b><small>${esc(t.short)}</small></button>`).join('');select.innerHTML=TYPES.map(t=>`<option value="${t.key}">${esc(t.title)}</option>`).join('')}
+function populateBrands(){const s=$('#brandSelect'),v=s.value;s.innerHTML='<option value="111atl">111ATL / General</option><option value="dr-dorsey">Dr. Dorsey / Hakuna Matata</option>'+state.entities.map(e=>`<option value="${esc(e.brand_key)}">${esc(e.brand_label)}</option>`).join('');if([...s.options].some(o=>o.value===v))s.value=v}
+function preset(k,opt={}){const t=type(k);state.selectedForm=t.key;$('#requestTypeSelect').value=t.key;$('#formKey').value=t.formKey;$('#formPanelTitle').textContent=t.title;$$('[data-field-group]').forEach(x=>x.classList.toggle('is-visible',t.groups.includes(x.dataset.fieldGroup)));const nda=t.key==='nda';$('#ndaFields').hidden=!nda;$('#signatureName').required=nda;$$('#ndaFields input[type=checkbox]').forEach(x=>x.required=nda);if(opt.brandKey&&[...$('#brandSelect').options].some(o=>o.value===opt.brandKey))$('#brandSelect').value=opt.brandKey;if(opt.scroll!==false){$('#formPanel').scrollIntoView({behavior:'smooth',block:'start'});setTimeout(()=>$('#universalForm input[name=full_name]').focus({preventScroll:true}),450)}}
+function findEvent(id){return state.events.find(e=>String(e.id)===String(id))}
+function chooseEvent(e){state.selectedEvent=e;$('#formEventId').value=e?.id||'';$('#formEventTitle').value=e?.title||'';const d=$('#universalForm input[name=preferred_date]');if(e?.event_date)d.value=e.event_date;preset('rsvp',{brandKey:e?.metadata?.brand_key||'grownish'});toast(`${e.title} selected for RSVP.`)}
+function openDialog(e){if(!e)return;$('#dialogDate').textContent=fmt(e.event_date);$('#dialogTitle').textContent=e.title||'111ATL Event';$('#dialogSubtitle').textContent=e.subtitle||'Direct RSVP and booking access through 111ATL.';$('#dialogVenue').textContent=[e.venue,e.address].filter(Boolean).join(' · ')||'Atlanta';$('#dialogTime').textContent=time(e);$('#dialogPoster').innerHTML=poster(e,state.events.indexOf(e));$('#dialogRsvp').dataset.rsvpEvent=e.id||'';const u=safe(e.ticket_url),a=$('#dialogTicket');a.hidden=!u;a.href=u||'#';$('#eventDialog').showModal?.()||$('#eventDialog').setAttribute('open','')}
+function closeDialog(){const d=$('#eventDialog');d.close?.()||d.removeAttribute('open')}
+function payload(form){const r=Object.fromEntries(new FormData(form));Object.keys(r).forEach(k=>{if(typeof r[k]==='string')r[k]=r[k].trim();if(r[k]==='')delete r[k]});const t=type(r.request_type||state.selectedForm),ent=state.entities.find(e=>e.brand_key===r.brand_key),brand=r.brand_key==='dr-dorsey'?'Dr. Dorsey / Hakuna Matata':r.brand_key==='111atl'?'111ATL / General':ent?.brand_label||r.brand_key;const p=new URLSearchParams(location.search),context=[`Request lane: ${t.title}`,`Brand / entity: ${brand}`,r.event_title&&`Event: ${r.event_title}`,r.organization&&`Organization: ${r.organization}`,r.city&&`City: ${r.city}`,r.message].filter(Boolean).join('\n'),out={...r,form_key:t.formKey,source:'111atl.com',page:location.pathname+location.hash,referrer:document.referrer||null,utm_source:p.get('utm_source'),utm_medium:p.get('utm_medium'),utm_campaign:p.get('utm_campaign'),submitted_at:new Date().toISOString(),event_interest:r.event_title||undefined,message:context,notes:context};if(t.key==='nda')out.form_type='nda';else if(t.key==='host'){out.form_type='host';out.role_interest='Host / Influencer';out.experience=context}else if(['rsvp','table','group'].includes(t.key)){out.form_type='booking';out.booking_type={rsvp:'event_rsvp',table:'vip_table',group:'group_pricing'}[t.key]}else{out.form_type='general';out.lead_type=t.key==='book'?'book_interest':t.key}['request_type','brand_key','organization','city'].forEach(k=>delete out[k]);return out}
+async function submit(e){e.preventDefault();const f=e.currentTarget,b=$('button[type=submit]',f),original=b.textContent,p=payload(f),status=$('.form-status',f);b.disabled=true;b.textContent='Sending…';status.className='form-status';status.textContent='Securely routing your request…';try{const r=await fetch('/api/leads',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(p)}),j=await r.json().catch(()=>({}));if(!r.ok)throw Error(j.error||'Request could not be submitted');const m=p.form_type==='nda'?'NDA signed and recorded.':p.lead_type==='book_interest'?'You are on the Hakuna Matata launch list.':'Request received and routed to the correct lane.';status.classList.add('is-success');status.textContent=m;toast(m);f.reset();$('#brandSelect').value='111atl';preset('inquiry',{scroll:false})}catch(err){status.classList.add('is-error');status.textContent=err.message;toast(err.message)}finally{b.disabled=false;b.textContent=original}}
+async function load(path,key){try{const r=await fetch(path,{cache:'no-store'}),j=await r.json();if(!r.ok)throw Error(j.error);return j[key]||[]}catch(e){console.error(path,e);return[]}}
+function toast(m){const t=$('#toast');clearTimeout(toast.timer);t.textContent=m;t.classList.add('is-visible');toast.timer=setTimeout(()=>t.classList.remove('is-visible'),3500)}
+function bind(){document.addEventListener('click',e=>{const p=e.target.closest('[data-form-preset]');if(p){e.preventDefault();preset(p.dataset.formPreset,{brandKey:p.dataset.brandForm});return}const o=e.target.closest('[data-open-event]');if(o){openDialog(findEvent(o.dataset.openEvent));return}const r=e.target.closest('[data-rsvp-event]');if(r){closeDialog();chooseEvent(findEvent(r.dataset.rsvpEvent));return}const ef=e.target.closest('[data-event-filter]');if(ef){state.eventFilter=ef.dataset.eventFilter;$$('[data-event-filter]').forEach(x=>x.classList.toggle('is-active',x===ef));renderEvents();return}const xf=e.target.closest('[data-entity-filter]');if(xf){state.entityFilter=xf.dataset.entityFilter;$$('[data-entity-filter]').forEach(x=>x.classList.toggle('is-active',x===xf));renderEntities()}});$('#entitySearch').addEventListener('input',e=>{state.search=e.target.value;renderEntities()});$('#requestTypeSelect').addEventListener('change',e=>preset(e.target.value,{scroll:false}));$('#universalForm').addEventListener('submit',submit);$('#dialogClose').addEventListener('click',closeDialog);$('#eventDialog').addEventListener('click',e=>{if(e.target===e.currentTarget)closeDialog()});const mb=$('#menuButton'),mm=$('#mobileMenu');mb.addEventListener('click',()=>{const open=mb.getAttribute('aria-expanded')==='true';mb.setAttribute('aria-expanded',String(!open));mm.classList.toggle('is-open',!open)});$$('a',mm).forEach(a=>a.addEventListener('click',()=>{mb.setAttribute('aria-expanded','false');mm.classList.remove('is-open')}));addEventListener('scroll',()=>$('#siteHeader').classList.toggle('is-scrolled',scrollY>24),{passive:true})}
+async function init(){renderTypes();populateBrands();preset('inquiry',{scroll:false});$$('input[type=date]').forEach(i=>i.min=dayKey());bind();const clock=()=>$('#atlClock').textContent=`${new Intl.DateTimeFormat('en-US',{timeZone:'America/New_York',hour:'numeric',minute:'2-digit'}).format(new Date())} ATL`;clock();setInterval(clock,30000);const [events,entities]=await Promise.all([load('/api/events','events'),load('/api/entities','entities')]);state.events=events.filter(e=>e.event_date>=dayKey()).sort((a,b)=>ordinal(a.event_date)-ordinal(b.event_date)||(a.sort_order||0)-(b.sort_order||0));state.entities=entities;renderEvents();renderEntities();const p=new URLSearchParams(location.search);if(p.get('form')||p.get('brand'))setTimeout(()=>preset(type(p.get('form')).key,{brandKey:p.get('brand')||undefined}),200)}
+document.addEventListener('DOMContentLoaded',init);
