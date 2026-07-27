@@ -19,13 +19,13 @@
     {
       "source": "/",
       "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=0, must-revalidate" }
+        { "key": "Cache-Control", "value": "no-store, max-age=0" }
       ]
     },
     {
-      "source": "/(styles.css|script.js)",
+      "source": "/(styles.css|script.js|hero-data-1.js|hero-data-2.js|hero-data-3.js|hero-data-4.js)",
       "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=0, must-revalidate" }
+        { "key": "Cache-Control", "value": "no-store, max-age=0" }
       ]
     },
     {
