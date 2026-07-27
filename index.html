@@ -4,17 +4,17 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="theme-color" content="#050505" />
-  <title>111ATL | Atlanta Events, Forms, Brands & Access</title>
-  <meta name="description" content="111ATL is the official public access hub for Atlanta events, RSVPs, VIP bookings, applications, partnerships, Kollective brands, and Dr. Dorsey's Hakuna Matata book." />
-  <meta property="og:title" content="111ATL — One Link. Every Move." />
-  <meta property="og:description" content="Current events, direct forms, official entity links, VIP access, and the Hakuna Matata book launch." />
+  <title>111ATL | Atlanta Events, Brands, Forms & Access</title>
+  <meta name="description" content="111ATL is Atlanta's public access hub for current events, RSVPs, VIP bookings, official brands, applications, partnerships, products, and Dr. Dorsey's Hakuna Matata book." />
+  <meta property="og:title" content="111ATL — Atlanta's Culture Command Center" />
+  <meta property="og:description" content="Current events, direct forms, official Atlanta-facing brands, products, and experiences in one place." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://111atl.com" />
   <meta name="twitter:card" content="summary_large_image" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="/styles.css?v=3" />
+  <link rel="stylesheet" href="/styles.css?v=4" />
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -22,19 +22,18 @@
 
   <header class="site-header" id="siteHeader">
     <a class="site-brand" href="#top" aria-label="111ATL home">
-      <span class="brand-mark">111</span>
-      <span class="brand-city">ATL</span>
+      <span class="brand-mark">111</span><span class="brand-city">ATL</span>
     </a>
 
     <nav class="desktop-nav" aria-label="Main navigation">
       <a href="#events">Events</a>
-      <a href="#entities">Entities</a>
-      <a href="#forms">Forms</a>
+      <a href="#focus">Brands</a>
       <a href="#book">Book</a>
+      <a href="#forms">Forms</a>
     </nav>
 
     <div class="header-actions">
-      <a class="button button-small button-outline-light" href="#forms">Find the Right Form</a>
+      <a class="button button-small button-outline-light" href="#forms">Start a Request</a>
       <button class="menu-button" id="menuButton" type="button" aria-expanded="false" aria-controls="mobileMenu" aria-label="Open menu">
         <span></span><span></span>
       </button>
@@ -42,33 +41,30 @@
 
     <nav class="mobile-menu" id="mobileMenu" aria-label="Mobile navigation">
       <a href="#events">Current Events</a>
-      <a href="#entities">Official Entity Links</a>
-      <a href="#forms">Forms + Applications</a>
+      <a href="#focus">Official Brands</a>
       <a href="#book">Hakuna Matata</a>
-      <a href="#legal">Legal Onboarding</a>
+      <a href="#forms">Forms + Applications</a>
     </nav>
   </header>
 
   <main id="main">
     <section class="hero" id="top">
-      <div class="hero-glow hero-glow-one" aria-hidden="true"></div>
-      <div class="hero-glow hero-glow-two" aria-hidden="true"></div>
-
+      <div class="hero-overlay" aria-hidden="true"></div>
       <div class="hero-copy">
-        <p class="eyebrow"><span class="live-dot"></span> The official Atlanta access hub</p>
-        <h1>One link.<br /><em>Every move.</em></h1>
-        <p class="hero-intro">Current events, direct RSVPs, official company links, applications, partnerships, bookings, and Dr. Dorsey’s book—organized in one place.</p>
+        <p class="eyebrow"><span class="live-dot"></span> Atlanta's public culture gateway</p>
+        <h1>Atlanta moves<br /><em>through here.</em></h1>
+        <p class="hero-intro">Current events, direct RSVPs, official brands, products, applications, partnerships, and experiences—organized in one place.</p>
 
         <div class="hero-buttons">
           <a class="button button-primary" href="#events">See Current Events</a>
-          <a class="button button-ghost" href="#forms">Open Forms</a>
+          <a class="button button-ghost" href="#focus">Explore the Network</a>
         </div>
 
         <div class="hero-stats" aria-label="111ATL capabilities">
-          <div><strong id="eventCount">Live</strong><span>Current events</span></div>
-          <div><strong>13</strong><span>Official entities</span></div>
-          <div><strong>17</strong><span>Direct form lanes</span></div>
-          <div><strong>1</strong><span>Book launch</span></div>
+          <div><strong id="eventCount">Live</strong><span>Upcoming events</span></div>
+          <div><strong>13</strong><span>Focus brands</span></div>
+          <div><strong>9</strong><span>Request lanes</span></div>
+          <div><strong>1</strong><span>Atlanta gateway</span></div>
         </div>
       </div>
 
@@ -76,39 +72,31 @@
         <div class="command-panel-top">
           <div>
             <span class="panel-label">111ATL Control Center</span>
-            <h2>Where are you trying to go?</h2>
+            <h2>Choose your next move.</h2>
           </div>
           <span class="panel-time" id="atlClock">ATL</span>
         </div>
 
         <div class="quick-lanes">
-          <a href="#events"><span class="lane-number">01</span><span><b>Events</b><small>Flyers, RSVP, VIP</small></span><i>↗</i></a>
-          <a href="#forms"><span class="lane-number">02</span><span><b>Forms</b><small>Apply, partner, book</small></span><i>↗</i></a>
-          <a href="#entities"><span class="lane-number">03</span><span><b>Entities</b><small>Official brand links</small></span><i>↗</i></a>
-          <a href="#book"><span class="lane-number">04</span><span><b>Hakuna Matata</b><small>Join the launch list</small></span><i>↗</i></a>
+          <a href="#events"><span class="lane-number">01</span><span><b>Go Out</b><small>Events, RSVP, VIP</small></span><i>↗</i></a>
+          <a href="#focus"><span class="lane-number">02</span><span><b>Explore</b><small>Brands and products</small></span><i>↗</i></a>
+          <a href="#forms" data-form-preset="partner"><span class="lane-number">03</span><span><b>Partner</b><small>Sponsor, vendor, collaborate</small></span><i>↗</i></a>
+          <a href="#book"><span class="lane-number">04</span><span><b>Read</b><small>Hakuna Matata</small></span><i>↗</i></a>
         </div>
 
         <div class="next-event" id="heroEvent" aria-live="polite">
-          <div class="mini-poster">
-            <span>UP NEXT</span>
-            <strong>ATLANTA</strong>
-            <small>Loading current event…</small>
-          </div>
-          <div>
-            <span class="panel-label">Live calendar</span>
-            <h3>Current events loading</h3>
-            <p>Only active and upcoming events are shown.</p>
-          </div>
+          <div class="mini-poster"><span>UP NEXT</span><strong>ATLANTA</strong><small>Loading current event…</small></div>
+          <div><span class="panel-label">Live calendar</span><h3>Current events loading</h3><p>Only active and upcoming events appear.</p></div>
         </div>
       </aside>
     </section>
 
     <section class="utility-strip" aria-label="Popular actions">
-      <a href="#events">RSVP TO AN EVENT <span>↗</span></a>
-      <a href="#forms" data-form-preset="table">BOOK A TABLE <span>↗</span></a>
-      <a href="#forms" data-form-preset="applicant">APPLY TO THE TEAM <span>↗</span></a>
-      <a href="#forms" data-form-preset="partner">PARTNER WITH US <span>↗</span></a>
-      <a href="#book">JOIN THE BOOK LAUNCH <span>↗</span></a>
+      <a href="#events">RSVP <span>↗</span></a>
+      <a href="#forms" data-form-preset="vip">BOOK VIP <span>↗</span></a>
+      <a href="#forms" data-form-preset="birthday">PLAN A BIRTHDAY <span>↗</span></a>
+      <a href="#forms" data-form-preset="team">JOIN THE TEAM <span>↗</span></a>
+      <a href="#book">THE BOOK <span>↗</span></a>
     </section>
 
     <section class="section events-section" id="events">
@@ -117,7 +105,7 @@
           <p class="eyebrow dark-eyebrow">Current calendar</p>
           <h2>No expired flyers.<br /><em>Only the next move.</em></h2>
         </div>
-        <p class="section-lede">The feed is connected to 111ATL’s live Supabase calendar. Past dates automatically disappear.</p>
+        <p class="section-lede">This feed is connected to the live 111ATL calendar. Past dates disappear automatically, and each event routes into the correct RSVP or VIP lane.</p>
       </div>
 
       <div class="event-controls">
@@ -137,27 +125,36 @@
       </div>
     </section>
 
-    <section class="section entities-section" id="entities">
+    <section class="kollective-band" aria-labelledby="gatewayTitle">
+      <div class="kollective-band-overlay" aria-hidden="true"></div>
+      <div class="kollective-band-copy">
+        <p class="eyebrow">The Kollective ENT.</p>
+        <h2 id="gatewayTitle">One ecosystem.<br /><em>Distinct brands.</em></h2>
+        <p>111ATL is the public gateway. Every company keeps its own identity, destination, and inquiry path.</p>
+        <a class="button button-primary" href="#focus">View Current Focus</a>
+      </div>
+    </section>
+
+    <section class="section focus-section" id="focus">
       <div class="section-heading heading-row light-heading">
         <div>
-          <p class="eyebrow">Official network</p>
-          <h2>Real logos.<br /><em>Correct destinations.</em></h2>
+          <p class="eyebrow">Current focus</p>
+          <h2>Atlanta-facing brands.<br /><em>Correct destinations.</em></h2>
         </div>
-        <p class="section-lede">Every card uses a verified transparent PNG and routes to the official company site or its correct inquiry lane.</p>
+        <p class="section-lede">Verified PNG logos are used where they exist. Brands without a confirmed transparent PNG use a clean text treatment instead of a wrong or low-quality file.</p>
       </div>
 
       <div class="entity-toolbar">
         <label class="entity-search">
-          <span class="sr-only">Search entities</span>
-          <input id="entitySearch" type="search" placeholder="Search a company, product, program, or event…" autocomplete="off" />
+          <span class="sr-only">Search brands</span>
+          <input id="entitySearch" type="search" placeholder="Search a brand, product, event, or program…" autocomplete="off" />
         </label>
-        <div class="filter-group entity-filters" aria-label="Filter entities">
+        <div class="filter-group entity-filters" aria-label="Filter brands">
           <button class="filter-button light-filter is-active" type="button" data-entity-filter="all">All</button>
           <button class="filter-button light-filter" type="button" data-entity-filter="enterprise">Enterprise</button>
-          <button class="filter-button light-filter" type="button" data-entity-filter="consumer">Consumer</button>
-          <button class="filter-button light-filter" type="button" data-entity-filter="events">Events</button>
-          <button class="filter-button light-filter" type="button" data-entity-filter="water">Water</button>
-          <button class="filter-button light-filter" type="button" data-entity-filter="community">Community</button>
+          <button class="filter-button light-filter" type="button" data-entity-filter="experience">Experience</button>
+          <button class="filter-button light-filter" type="button" data-entity-filter="culture">Culture</button>
+          <button class="filter-button light-filter" type="button" data-entity-filter="products">Products</button>
         </div>
       </div>
 
@@ -165,22 +162,33 @@
       <p class="entity-status" id="entityStatus" role="status"></p>
     </section>
 
+    <section class="section book-section" id="book">
+      <div class="book-visual">
+        <img src="https://dzlmtvodpyhetvektfuo.supabase.co/storage/v1/object/public/brand-graphics/bodega/hakuna-matata/cover-hero.png" alt="Hakuna Matata book by Dr. Dorsey" loading="lazy" />
+      </div>
+      <div class="book-copy">
+        <p class="eyebrow dark-eyebrow">By Dr. Dorsey</p>
+        <h2>Hakuna<br /><em>Matata.</em></h2>
+        <p class="book-intro">A culture-forward guide to enjoying life while building something that lasts. Join the launch list for purchasing details, appearances, speaking opportunities, and bulk orders.</p>
+        <div class="book-actions">
+          <a class="button button-dark" href="#forms" data-form-preset="book">Join the Launch List</a>
+          <a class="button button-outline-dark" href="https://doctordorsey.com" target="_blank" rel="noopener">Visit Dr. Dorsey ↗</a>
+        </div>
+      </div>
+    </section>
+
     <section class="section forms-section" id="forms">
       <div class="forms-layout">
         <div class="forms-copy">
-          <p class="eyebrow dark-eyebrow">Form router</p>
+          <p class="eyebrow dark-eyebrow">Direct form router</p>
           <h2>Choose the request.<br /><em>We route the rest.</em></h2>
-          <p>Stop guessing which inbox or person to contact. Select the company and request type, and 111ATL sends it into the correct operating lane.</p>
-
-          <div class="form-lane-grid" id="formLaneGrid" aria-label="Available forms"></div>
+          <p>Select a brand and request type. Your submission enters the correct 111ATL operating lane without sending you through multiple pages or inboxes.</p>
+          <div class="form-lane-grid" id="formLaneGrid" aria-label="Available request types"></div>
         </div>
 
         <div class="universal-form-shell" id="formPanel">
           <div class="form-shell-head">
-            <div>
-              <span class="panel-label">Direct submission</span>
-              <h3 id="formPanelTitle">General Inquiry</h3>
-            </div>
+            <div><span class="panel-label">Direct submission</span><h3 id="formPanelTitle">General Inquiry</h3></div>
             <span class="secure-badge">SECURE ROUTING</span>
           </div>
 
@@ -191,26 +199,21 @@
             <label class="honeypot" aria-hidden="true">Website<input name="company_website" tabindex="-1" autocomplete="off" /></label>
 
             <div class="form-grid">
-              <label class="full-column">Company / Entity
-                <select name="brand_key" id="brandSelect">
-                  <option value="111atl">111ATL / General</option>
-                </select>
+              <label class="full-column">Company / Brand
+                <select name="brand_key" id="brandSelect"><option value="111atl">111ATL / General</option></select>
               </label>
-
               <label class="full-column">Request Type
                 <select name="request_type" id="requestTypeSelect" required></select>
               </label>
-
               <label>Full Name<input name="full_name" autocomplete="name" required placeholder="Your full name" /></label>
               <label>Phone<input name="phone" autocomplete="tel" inputmode="tel" required placeholder="(404) 000-0000" /></label>
               <label>Email<input type="email" name="email" autocomplete="email" placeholder="you@email.com" /></label>
               <label>Instagram<input name="instagram" autocomplete="off" placeholder="@handle" /></label>
               <label>Organization<input name="organization" autocomplete="organization" placeholder="Company or group" /></label>
               <label>City<input name="city" autocomplete="address-level2" value="Atlanta" /></label>
-
               <label class="conditional-field" data-field-group="date">Preferred Date<input type="date" name="preferred_date" /></label>
               <label class="conditional-field" data-field-group="party">Party / Group Size<input type="number" name="party_size" min="1" max="1000" placeholder="8" /></label>
-              <label class="conditional-field" data-field-group="budget">Budget
+              <label class="conditional-field full-column" data-field-group="budget">Budget
                 <select name="budget">
                   <option value="">Select budget</option>
                   <option>$500–$1,000</option>
@@ -222,28 +225,8 @@
               </label>
             </div>
 
-            <div class="nda-fields" id="ndaFields" hidden>
-              <div class="legal-summary">
-                <strong>111ATL Confidentiality + Non-Circumvention Agreement</strong>
-                <p>Internal access requires confidentiality, non-circumvention, intellectual-property acknowledgement, and a typed legal signature.</p>
-              </div>
-              <label>Legal Title / Entity<input name="title_entity" placeholder="Title or company" /></label>
-              <label>Typed Legal Signature<input name="signature_name" id="signatureName" placeholder="Type your legal name" /></label>
-              <div class="agreement-checks">
-                <label><input type="checkbox" name="accepted_confidentiality" value="true" /> <span>I agree to keep confidential information private.</span></label>
-                <label><input type="checkbox" name="accepted_non_compete_non_circumvention" value="true" /> <span>I accept the non-circumvention terms.</span></label>
-                <label><input type="checkbox" name="accepted_ip_terms" value="true" /> <span>I acknowledge ownership of disclosed intellectual property.</span></label>
-                <label><input type="checkbox" name="accepted_full_agreement" value="true" /> <span>I have reviewed and accept the full agreement.</span></label>
-              </div>
-            </div>
-
-            <label>Details<textarea name="message" rows="5" placeholder="Tell us what you need, the opportunity, deadline, preferred location, or any important context."></textarea></label>
-
-            <div class="consent-grid">
-              <label><input type="checkbox" name="sms_consent" value="true" /> <span>Text me about this request and relevant updates.</span></label>
-              <label><input type="checkbox" name="email_consent" value="true" /> <span>Email me confirmation and follow-up.</span></label>
-            </div>
-
+            <label>Tell us what you need<textarea name="notes" required placeholder="Include the event, goal, quantity, partnership idea, role, product, or service you are asking about."></textarea></label>
+            <label class="consent-row"><input type="checkbox" name="sms_consent" value="true" /> <span>Text me about this request and relevant 111ATL updates. Message/data rates may apply.</span></label>
             <button class="button button-primary button-wide" type="submit">Submit Request</button>
             <p class="form-status" role="status"></p>
           </form>
@@ -251,79 +234,37 @@
       </div>
     </section>
 
-    <section class="book-section" id="book">
-      <div class="book-visual" aria-label="Hakuna Matata book cover concept">
-        <div class="book-shadow"></div>
-        <article class="book-cover">
-          <div class="book-cover-top">
-            <span>DR. DORSEY</span>
-            <span>THE POWER IN PEACE</span>
-          </div>
-          <div class="book-title">
-            <small>A BOOK ABOUT PEACE, PRESSURE & PROOF</small>
-            <strong>HAKUNA<br />MATATA</strong>
-          </div>
-          <div class="book-cover-bottom">
-            <span>30 SECTIONS</span>
-            <span>LIVE FOR TODAY. PLAN FOR TOMORROW.</span>
-          </div>
-        </article>
+    <section class="final-cta">
+      <p class="eyebrow">111ATL</p>
+      <h2>One link.<br />The right move.</h2>
+      <div class="final-actions">
+        <a class="button button-primary" href="#events">See Events</a>
+        <a class="button button-ghost" href="#forms">Start a Request</a>
       </div>
-
-      <div class="book-copy">
-        <p class="eyebrow">Featured book</p>
-        <h2>Peace is not passive.<br /><em>It is a power move.</em></h2>
-        <p class="book-intro"><strong>Hakuna Matata: The Power in Peace</strong> is Dr. Dorsey’s framework for protecting your atmosphere, moving with discipline, building your empire, and choosing calm without losing ambition.</p>
-
-        <div class="book-points">
-          <div><span>01</span><p><strong>30 sections</strong> of peace, pressure, parables, and proof.</p></div>
-          <div><span>02</span><p><strong>Real-life wisdom</strong> built for daily decisions and long-term legacy.</p></div>
-          <div><span>03</span><p><strong>Launch access</strong> for early readers, events, speaking, and bulk orders.</p></div>
-        </div>
-
-        <div class="book-actions">
-          <button class="button button-light" type="button" data-form-preset="book">Join the Book Launch</button>
-          <a class="button button-outline-light" href="https://doctordorsey.com" target="_blank" rel="noopener">Meet Dr. Dorsey ↗</a>
-        </div>
-      </div>
-    </section>
-
-    <section class="section final-cta" id="legal">
-      <div>
-        <p class="eyebrow">Still not sure?</p>
-        <h2>Start with a general inquiry.<br />111ATL will route it.</h2>
-      </div>
-      <button class="button button-primary" type="button" data-form-preset="inquiry">Open General Inquiry</button>
     </section>
   </main>
 
   <footer class="site-footer">
     <a class="footer-brand" href="#top"><span>111</span>ATL</a>
-    <div class="footer-copy">
-      <strong>One link. Every move.</strong>
-      <p>Current events, official entity links, direct forms, partnerships, bookings, and the Hakuna Matata book.</p>
+    <div class="footer-links">
+      <a href="#events">Events</a><a href="#focus">Brands</a><a href="#book">Book</a><a href="#forms">Forms</a>
     </div>
-    <nav class="footer-links" aria-label="Footer navigation">
-      <a href="#events">Events</a>
-      <a href="#entities">Entities</a>
-      <a href="#forms">Forms</a>
-      <a href="#book">Book</a>
-    </nav>
-    <a class="back-top" href="#top" aria-label="Back to top">↑</a>
+    <p>© 2026 The Kollective ENT. · Atlanta, Georgia</p>
   </footer>
 
-  <nav class="mobile-dock" aria-label="Quick actions">
-    <a href="#events">Events</a>
-    <a href="#entities">Brands</a>
-    <a class="dock-primary" href="#forms">Forms</a>
-    <a href="#book">Book</a>
+  <nav class="mobile-dock" aria-label="Mobile quick navigation">
+    <a href="#top"><span>⌂</span>Home</a>
+    <a href="#events"><span>◉</span>Events</a>
+    <a href="#focus"><span>◆</span>Brands</a>
+    <a href="#book"><span>▤</span>Book</a>
+    <a href="#forms"><span>＋</span>Forms</a>
   </nav>
 
   <dialog class="event-dialog" id="eventDialog">
     <button class="dialog-close" id="dialogClose" type="button" aria-label="Close event details">×</button>
     <div class="dialog-poster" id="dialogPoster"></div>
-    <div class="dialog-content">
-      <p class="eyebrow dark-eyebrow" id="dialogDate">Upcoming event</p>
+    <div class="dialog-copy">
+      <span class="eyebrow dark-eyebrow" id="dialogDate">Event</span>
       <h2 id="dialogTitle">111ATL Event</h2>
       <p id="dialogSubtitle"></p>
       <dl class="event-facts">
@@ -331,13 +272,12 @@
         <div><dt>Time</dt><dd id="dialogTime">TBA</dd></div>
       </dl>
       <div class="dialog-actions">
-        <button class="button button-primary" id="dialogRsvp" type="button">RSVP Direct</button>
-        <a class="button button-dark" id="dialogTicket" href="#" target="_blank" rel="noopener" hidden>Tickets ↗</a>
+        <button class="button button-dark" id="dialogRsvp" type="button">RSVP Direct</button>
+        <a class="button button-outline-dark" id="dialogTicket" href="#" target="_blank" rel="noopener" hidden>Tickets ↗</a>
       </div>
     </div>
   </dialog>
 
-  <div class="toast" id="toast" role="status" aria-live="polite"></div>
-  <script src="/script.js?v=3" defer></script>
+  <script src="/script.js?v=4" defer></script>
 </body>
 </html>
