@@ -1,3 +1,4 @@
+// Current-status build lock v4.1
 import fs from 'node:fs';
 
 const replaceAll = (source, replacements, label) => {
