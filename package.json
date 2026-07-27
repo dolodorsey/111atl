@@ -1,11 +1,11 @@
 {
   "name": "111atl",
-  "version": "4.0.0",
+  "version": "4.1.0",
   "private": true,
   "type": "module",
-  "description": "111ATL public access hub for Atlanta events, official focus brands, forms, bookings, products, and the Hakuna Matata book.",
+  "description": "111ATL public access hub for current Rose on Piedmont programming, Atlanta focus brands, forms, bookings, products, and Hakuna Matata.",
   "scripts": {
-    "build": "rm -rf public && mkdir -p public && cp index.html styles.css script.js hero-data-*.js public/",
+    "build": "rm -rf public && mkdir -p public && cp index.html styles.css script.js hero-data-*.js public/ && node patch-current-status.mjs",
     "start": "echo 'Serve with Vercel or any static server'"
   },
   "engines": {
