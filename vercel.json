@@ -4,7 +4,8 @@
   "cleanUrls": true,
   "trailingSlash": false,
   "rewrites": [
-    { "source": "/forms/:slug", "destination": "/?form=:slug" }
+    { "source": "/forms", "destination": "/form" },
+    { "source": "/forms/:slug", "destination": "/form?form=:slug" }
   ],
   "headers": [
     {
