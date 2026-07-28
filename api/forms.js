@@ -13,7 +13,7 @@ export default async function handler(req, res) {
   const { url, key } = config();
   const params = new URLSearchParams({
     status: 'eq.active',
-    select: 'form_key,form_type,lane,brand_key,brand_label,title,description,public_url,metadata',
+    select: 'form_key,form_type,lane,brand_key,brand_label,title,description,public_url,fields,metadata',
     order: 'lane.asc,title.asc'
   });
 

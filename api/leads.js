@@ -1,13 +1,6 @@
 const FALLBACK_SUPABASE_URL = 'https://sccmgpssfwhgxefbdwbc.supabase.co';
 const FALLBACK_SUPABASE_KEY = 'sb_publishable_jLo4bXprbOdVGLsW9Z2QEQ_MNhzC2jW';
 
-const VIEW_MAP = {
-  leads: 'one11atl_leads',
-  bookings: 'one11atl_bookings',
-  host_applications: 'one11atl_host_applications',
-  ndas: 'one11atl_ndas'
-};
-
 const BOOKING_TYPES = new Set([
   'vip',
   'vip_table',
@@ -84,6 +77,10 @@ function resolveTable(payload) {
 }
 
 function baseMetadata(payload, req) {
+  const ipAddress = String(req.headers['x-forwarded-for'] || req.socket?.remoteAddress || '')
+    .split(',')[0]
+    .trim()
+    .slice(0, 100) || null;
   return {
     page: payload.page || null,
     submitted_at: payload.submitted_at || new Date().toISOString(),
@@ -94,6 +91,7 @@ function baseMetadata(payload, req) {
     utm_medium: payload.utm_medium || null,
     utm_campaign: payload.utm_campaign || null,
     referrer: payload.referrer || null,
+    ip_address: ipAddress,
     sms_consent: asBoolean(payload.sms_consent),
     email_consent: asBoolean(payload.email_consent)
   };
@@ -120,10 +118,7 @@ function normalizeForTable(table, payload, req) {
       accepted_ip_terms: asBoolean(payload.accepted_ip_terms),
       accepted_full_agreement: asBoolean(payload.accepted_full_agreement),
       source,
-      ip_address: String(req.headers['x-forwarded-for'] || req.socket?.remoteAddress || '')
-        .split(',')[0]
-        .trim()
-        .slice(0, 100) || null,
+      ip_address: metadata.ip_address,
       user_agent: req.headers['user-agent'] || null,
       metadata
     };
@@ -199,11 +194,10 @@ function validate(table, payload) {
 
 async function supabaseInsert(table, record) {
   const { url, key } = getSupabaseConfig();
-  const view = VIEW_MAP[table];
-  const response = await fetch(`${url}/rest/v1/${view}`, {
+  const response = await fetch(`${url}/rest/v1/rpc/submit_one11atl_public_form`, {
     method: 'POST',
     headers: authHeaders(key),
-    body: JSON.stringify(record)
+    body: JSON.stringify({ p_table: table, p_payload: record })
   });
 
   const text = await response.text();
@@ -213,7 +207,7 @@ async function supabaseInsert(table, record) {
     throw error;
   }
 
-  return text ? JSON.parse(text) : [];
+  return text ? JSON.parse(text) : null;
 }
 
 export default async function handler(req, res) {
@@ -239,7 +233,7 @@ export default async function handler(req, res) {
     return res.status(200).json({
       ok: true,
       table,
-      record: inserted?.[0] || null
+      record: inserted || null
     });
   } catch (error) {
     console.error('111ATL lead submission error:', error);
