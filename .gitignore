@@ -1,11 +1,6 @@
 node_modules/
-.env
-.env.local
-.DS_Store
-*.log
-.next/
-out/
-build/
-dist/
-.vercel
-.env*.local
+.vercel/
+.env*
+public/*.html
+public/*.css
+public/*.js
