@@ -1,4 +1,5 @@
 {
+  "$schema": "https://openapi.vercel.sh/vercel.json",
   "cleanUrls": true,
   "trailingSlash": false,
   "redirects": [
@@ -9,7 +10,7 @@
     { "source": "/forms/:path*", "destination": "/", "permanent": false }
   ],
   "rewrites": [
-    { "source": "/events/:slug", "destination": "/index.html" }
+    { "source": "/events/:slug", "destination": "/" }
   ],
   "headers": [
     {
