@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="theme-color" content="#080808" />
+  <meta name="theme-color" content="#080807" />
   <meta name="color-scheme" content="dark" />
   <title>111ATL — Atlanta Events</title>
   <meta name="description" content="111ATL is the home for upcoming Atlanta events, Labor Day Weekend, the Ball Series, Winter Wonderland, New Year's Eve, and Juneteenth ATL." />
@@ -15,49 +15,42 @@
   <link rel="canonical" href="https://111atl.com" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Manrope:wght@400;500;600;700&family=Unbounded:wght@500;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="/styles.css?v=1" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/styles.css?v=2" />
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to events</a>
 
   <header class="site-header" id="siteHeader">
-    <a class="wordmark" href="/" aria-label="111ATL home">
-      <span class="mark-111">111</span><span class="mark-atl">ATL</span>
-    </a>
+    <a class="wordmark" href="/" aria-label="111ATL home"><span>111</span><b>ATL</b></a>
     <nav class="desktop-nav" aria-label="Primary navigation">
       <a href="#labor-day">Labor Day</a>
       <a href="#ball-series">Ball Series</a>
       <a href="#seasonal">Seasonal</a>
     </nav>
-    <button class="button button-small header-button" data-open-list type="button">Get updates</button>
+    <button class="header-cta" data-open-list type="button">Get Updates ↗</button>
   </header>
 
   <main id="main">
     <section class="hero" id="top">
-      <div class="hero-grid" aria-hidden="true"></div>
-      <div class="hero-orbit orbit-one" aria-hidden="true"></div>
-      <div class="hero-orbit orbit-two" aria-hidden="true"></div>
+      <div class="hero-media" id="heroMedia" aria-hidden="true"></div>
+      <div class="hero-shade" aria-hidden="true"></div>
       <div class="hero-copy">
-        <p class="eyebrow"><span></span> Atlanta, Georgia</p>
-        <h1><span>WHAT'S</span><br /><strong>NEXT</strong><br /><span>IN ATL.</span></h1>
-        <div class="hero-bottom">
+        <p class="kicker">Atlanta / events / culture</p>
+        <h1>WHAT'S<br /><em>NEXT.</em></h1>
+        <div class="hero-lower">
           <p>One city. The right weekends. The events worth showing up for.</p>
-          <a class="text-link" href="#labor-day">See the calendar <span>↘</span></a>
+          <a href="#labor-day">Enter the calendar ↘</a>
         </div>
-      </div>
-      <div class="hero-stamp" aria-hidden="true">
-        <span>111</span>
-        <small>ATL / 2026–27</small>
       </div>
       <aside class="next-up" id="nextUp" aria-live="polite">
-        <p class="micro-label">Next up</p>
-        <div class="next-up-main">
-          <strong id="nextTitle">Loading…</strong>
-          <span id="nextDate">Atlanta, GA</span>
-        </div>
+        <span class="next-label">Next up</span>
+        <strong id="nextTitle">Loading…</strong>
+        <small id="nextDate">Atlanta, GA</small>
         <div class="countdown" id="countdown" aria-label="Countdown to next event"></div>
+        <button type="button" id="nextEventButton">View Event ↗</button>
       </aside>
+      <span class="hero-edge">111ATL / ATLANTA, GEORGIA / 2026–27</span>
     </section>
 
     <div class="ticker" aria-hidden="true">
@@ -67,62 +60,64 @@
       </div>
     </div>
 
-    <section class="section labor-section" id="labor-day">
-      <div class="section-intro">
+    <section class="events-section surface-deep" id="labor-day">
+      <header class="section-header reveal">
         <div>
           <p class="section-number">01 / WEEKEND</p>
-          <p class="eyebrow dark"><span></span> September 4–7, 2026</p>
-          <h2>Labor Day<br />Weekend.</h2>
+          <p class="kicker">September 4–7, 2026</p>
+          <h2>LABOR DAY<br /><em>WEEKEND.</em></h2>
         </div>
         <div class="section-note">
           <p>Four days. Four different reasons to be outside.</p>
           <span>ATLANTA · FRI → MON</span>
         </div>
-      </div>
+      </header>
       <div class="event-grid labor-grid" id="laborGrid" aria-live="polite">
         <div class="skeleton"></div><div class="skeleton"></div><div class="skeleton"></div><div class="skeleton"></div>
       </div>
     </section>
 
-    <section class="section ball-section" id="ball-series">
-      <div class="ball-watermark" aria-hidden="true">BALL</div>
-      <div class="section-intro ball-intro">
+    <section class="events-section surface-warm" id="ball-series">
+      <div class="section-film-mark" aria-hidden="true">BALL</div>
+      <header class="section-header reveal">
         <div>
-          <p class="section-number light">02 / SERIES</p>
-          <p class="eyebrow"><span></span> Formal nights. Different worlds.</p>
-          <h2>The Ball<br />Series.</h2>
+          <p class="section-number">02 / SERIES</p>
+          <p class="kicker">Formal nights / different worlds</p>
+          <h2>THE BALL<br /><em>SERIES.</em></h2>
         </div>
-        <div class="section-note light-note">
-          <p>Six dates. One signature series.</p>
+        <div class="section-note dark-note">
+          <p>Six dates. One signature Atlanta series.</p>
           <span>OCT 2026 → FEB 2027</span>
         </div>
-      </div>
-      <div class="ball-list" id="ballGrid" aria-live="polite"></div>
+      </header>
+      <div class="event-grid ball-grid" id="ballGrid" aria-live="polite"></div>
     </section>
 
-    <section class="section seasonal-section" id="seasonal">
-      <div class="section-intro">
+    <section class="events-section surface-deep" id="seasonal">
+      <header class="section-header reveal">
         <div>
           <p class="section-number">03 / CITY MOMENTS</p>
-          <p class="eyebrow dark"><span></span> Big dates deserve their own event.</p>
-          <h2>Seasonal<br />Atlanta.</h2>
+          <p class="kicker">Big dates deserve their own event</p>
+          <h2>SEASONAL<br /><em>ATLANTA.</em></h2>
         </div>
-      </div>
-      <div class="seasonal-grid" id="seasonalGrid" aria-live="polite"></div>
+        <div class="section-note">
+          <p>Holiday season, the new year, and the city moments we build around.</p>
+          <span>ATLANTA · 2026 → 2027</span>
+        </div>
+      </header>
+      <div class="event-grid seasonal-grid" id="seasonalGrid" aria-live="polite"></div>
     </section>
 
-    <section class="list-section" id="list">
-      <div class="list-art" aria-hidden="true">
-        <span class="giant-one">1</span><span class="giant-one second">1</span><span class="giant-one third">1</span>
-      </div>
-      <div class="list-content">
-        <p class="eyebrow"><span></span> Stay ahead of the drop</p>
-        <h2>Know before<br />everybody knows.</h2>
+    <section class="access-section">
+      <div class="access-mark" aria-hidden="true"><span>1</span><span>1</span><span>1</span></div>
+      <div class="access-copy reveal">
+        <p class="kicker">Direct access / stay ahead</p>
+        <h2>KNOW BEFORE<br /><em>EVERYBODY KNOWS.</em></h2>
         <p>Dates, locations, ticket releases and major announcements. No generic newsletter.</p>
         <form class="signup-form" id="mainSignup" novalidate>
           <label class="sr-only" for="mainEmail">Email address</label>
           <input id="mainEmail" name="email" type="email" autocomplete="email" placeholder="YOUR EMAIL" required />
-          <button type="submit">Join the list <span>↗</span></button>
+          <button type="submit">Join the list ↗</button>
           <p class="form-message" id="mainFormMessage" role="status"></p>
         </form>
       </div>
@@ -130,27 +125,17 @@
   </main>
 
   <footer>
-    <a class="wordmark footer-mark" href="#top"><span class="mark-111">111</span><span class="mark-atl">ATL</span></a>
-    <div class="footer-links">
-      <a href="#labor-day">Labor Day Weekend</a>
-      <a href="#ball-series">Ball Series</a>
-      <a href="#seasonal">Seasonal</a>
-    </div>
-    <div class="footer-meta">
-      <span>ATLANTA, GEORGIA</span>
-      <span>© <span id="year">2026</span> 111ATL</span>
-    </div>
+    <a class="wordmark footer-mark" href="#top"><span>111</span><b>ATL</b></a>
+    <p>ATLANTA'S EVENT CALENDAR.</p>
+    <div class="footer-links"><a href="#labor-day">Labor Day</a><a href="#ball-series">Ball Series</a><a href="#seasonal">Seasonal</a></div>
+    <span>© <span id="year">2026</span> 111ATL</span>
   </footer>
 
   <dialog class="event-dialog" id="eventDialog" aria-labelledby="dialogTitle">
     <button class="dialog-close" id="dialogClose" type="button" aria-label="Close event details">×</button>
-    <div class="dialog-poster" id="dialogPoster" aria-hidden="true">
-      <span id="dialogPosterSeries">111ATL</span>
-      <strong id="dialogPosterTitle">EVENT</strong>
-      <small>ATLANTA</small>
-    </div>
+    <div class="dialog-visual" id="dialogVisual"></div>
     <div class="dialog-content">
-      <p class="micro-label" id="dialogSeries">111ATL EVENT</p>
+      <p class="kicker" id="dialogSeries">111ATL EVENT</p>
       <h2 id="dialogTitle">Event</h2>
       <p class="dialog-date" id="dialogDate"></p>
       <p class="dialog-location" id="dialogLocation"></p>
@@ -162,19 +147,19 @@
   <dialog class="list-dialog" id="listDialog" aria-labelledby="listDialogTitle">
     <button class="dialog-close" id="listDialogClose" type="button" aria-label="Close updates form">×</button>
     <div class="list-dialog-content">
-      <p class="eyebrow"><span></span> 111ATL ACCESS</p>
-      <h2 id="listDialogTitle">Get the drop first.</h2>
+      <p class="kicker">111ATL ACCESS</p>
+      <h2 id="listDialogTitle">GET THE DROP FIRST.</h2>
       <p id="listDialogCopy">We'll send the details when this event moves.</p>
       <form class="signup-form dialog-signup" id="eventSignup" novalidate>
         <label class="sr-only" for="eventEmail">Email address</label>
         <input id="eventEmail" name="email" type="email" autocomplete="email" placeholder="YOUR EMAIL" required />
-        <button type="submit">Notify me <span>↗</span></button>
+        <button type="submit">Notify me ↗</button>
         <p class="form-message" id="eventFormMessage" role="status"></p>
       </form>
     </div>
   </dialog>
 
   <noscript><div class="noscript">111ATL requires JavaScript to load the current event calendar.</div></noscript>
-  <script src="/app.js?v=1" defer></script>
+  <script src="/app.js?v=2" defer></script>
 </body>
 </html>
