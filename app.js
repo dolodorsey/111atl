@@ -10,13 +10,96 @@ const FALLBACK_EVENTS = [
   { slug:'greek-ball', title:'Greek Ball', series:'Ball Series', event_date:'2026-10-17', date_label:'October 17, 2026', location_text:'Atlanta, GA', description:'The Ball Series opens with a polished celebration of Greek culture, legacy and Atlanta energy.', status:'upcoming', ticket_url:null, sort_order:50, motion_video_url:`${MOTION_BASE}/111atl/greek-ball.mp4`, motion_poster_url:`${MOTION_BASE}/111atl/greek-ball.jpg` },
   { slug:'monsters-ball', title:'Monster’s Ball', series:'Ball Series', event_date:'2026-10-31', date_label:'October 31, 2026', location_text:'Atlanta, GA', description:'Halloween night, elevated into a formal 111ATL Ball Series experience.', status:'upcoming', ticket_url:null, sort_order:60, motion_video_url:`${MOTION_BASE}/111atl/monsters-ball.mp4`, motion_poster_url:`${MOTION_BASE}/111atl/monsters-ball.jpg` },
   { slug:'black-ball', title:'Black Ball', series:'Ball Series', event_date:'2026-11-28', date_label:'November 28, 2026', location_text:'Atlanta, GA', description:'An all-black Ball Series night built around style, presence and celebration.', status:'upcoming', ticket_url:null, sort_order:70, motion_video_url:`${MOTION_BASE}/111atl/black-ball.mp4`, motion_poster_url:`${MOTION_BASE}/111atl/black-ball.jpg` },
-  { slug:'snow-ball', title:'Snow Ball', series:'Ball Series', event_date:'2026-12-12', date_label:'December 12, 2026', location_text:'Atlanta, GA', description:'An all-white winter Ball Series experience in Atlanta.', status:'upcoming', ticket_url:null, sort_order:80, motion_video_url:`${MOTION_BASE}/111atl/snow-ball.mp4`, motion_poster_url:`${MOTION_BASE}/111atl/snow-ball.jpg` },
+  { slug:'snow-ball', title:'Snow Ball', series:'Ball Series', event_date:'2026-12-19', date_label:'Saturday · December 19, 2026', location_text:'Atlanta, GA', description:'An all-white winter Ball Series experience in Atlanta.', status:'upcoming', ticket_url:null, sort_order:80, motion_video_url:`${MOTION_BASE}/111atl/snow-ball.mp4`, motion_poster_url:`${MOTION_BASE}/111atl/snow-ball.jpg` },
+  { slug:"members-elite-kings-nov", title:"KINGS OF THE COURT — Men’s 5v5", series:'Member’s Elite — Sports', event_date:"2026-11-20", date_label:"Friday · November 20, 2026", location_text:'Atlanta, GA', description:"Men’s 5v5 competition. Event times, location and ticket details announcing.", status:'announcing', ticket_url:null, sort_order:150, motion_video_url:null, motion_poster_url:null },
+  { slug:"members-elite-shebang-nov", title:"SHE BANG — Women’s Dunk League", series:'Member’s Elite — Sports', event_date:"2026-11-21", date_label:"Saturday · November 21, 2026", location_text:'Atlanta, GA', description:"Women’s lowered-rim dunk competition. Location, registration and times announcing.", status:'announcing', ticket_url:null, sort_order:160, motion_video_url:null, motion_poster_url:null },
+  { slug:"members-elite-championship-nov", title:"CHAMPIONSHIP SUNDAY — November", series:'Member’s Elite — Sports', event_date:"2026-11-22", date_label:"Sunday · November 22, 2026", location_text:'Atlanta, GA', description:"Championship Sunday. Matchups, venue and admission details announcing.", status:'announcing', ticket_url:null, sort_order:170, motion_video_url:null, motion_poster_url:null },
+  { slug:"members-elite-kings-dec", title:"KINGS OF THE COURT — Men’s 5v5", series:'Member’s Elite — Sports', event_date:"2026-12-18", date_label:"Friday · December 18, 2026", location_text:'Atlanta, GA', description:"December Men’s 5v5 competition. Location and ticket details announcing.", status:'announcing', ticket_url:null, sort_order:180, motion_video_url:null, motion_poster_url:null },
+  { slug:"members-elite-shebang-dec", title:"SHE BANG — Women’s Dunk League", series:'Member’s Elite — Sports', event_date:"2026-12-19", date_label:"Saturday · December 19, 2026", location_text:'Atlanta, GA', description:"December women’s dunk league. Registration and venue details announcing.", status:'announcing', ticket_url:null, sort_order:190, motion_video_url:null, motion_poster_url:null },
+  { slug:"members-elite-championship-dec", title:"CHAMPIONSHIP SUNDAY — December", series:'Member’s Elite — Sports', event_date:"2026-12-20", date_label:"Sunday · December 20, 2026", location_text:'Atlanta, GA', description:"December Championship Sunday. Venue, matchups and admission details announcing.", status:'announcing', ticket_url:null, sort_order:200, motion_video_url:null, motion_poster_url:null },
   { slug:'winter-wonderland', title:'Winter Wonderland', series:'Seasonal', event_date:null, date_label:'Winter 2026 · Date Announcing', location_text:'Atlanta, GA', description:'A holiday-season 111ATL experience. Full details will be announced soon.', status:'announcing', ticket_url:null, sort_order:90, motion_video_url:`${MOTION_BASE}/111atl/winter-wonderland.mp4`, motion_poster_url:`${MOTION_BASE}/111atl/winter-wonderland.jpg` },
   { slug:'new-years-eve', title:'New Year’s Eve', series:'Seasonal', event_date:'2026-12-31', date_label:'December 31, 2026', location_text:'Atlanta, GA', description:'111ATL closes the year with a New Year’s Eve experience built for the city.', status:'upcoming', ticket_url:null, sort_order:100, motion_video_url:null, motion_poster_url:null },
-  { slug:'champagne-ball', title:'Champagne Ball', series:'Ball Series', event_date:'2027-01-02', date_label:'January 2, 2027', location_text:'Atlanta, GA', description:'A celebration of success, momentum and the new year.', status:'upcoming', ticket_url:null, sort_order:110, motion_video_url:`${MOTION_BASE}/111atl/champagne-ball.mp4`, motion_poster_url:`${MOTION_BASE}/111atl/champagne-ball.jpg` },
+  { slug:'champagne-ball', title:'Champagne Ball', series:'Ball Series', event_date:'2026-12-31', date_label:'Thursday · December 31, 2026 · New Year’s Eve', location_text:'Atlanta, GA', description:'A celebration of success, momentum and the new year.', status:'upcoming', ticket_url:null, sort_order:110, motion_video_url:`${MOTION_BASE}/111atl/champagne-ball.mp4`, motion_poster_url:`${MOTION_BASE}/111atl/champagne-ball.jpg` },
   { slug:'rose-ball', title:'Rose Ball', series:'Ball Series', event_date:'2027-02-13', date_label:'February 13, 2027', location_text:'Atlanta, GA', description:'A Valentine’s weekend Ball Series experience in shades of red.', status:'upcoming', ticket_url:null, sort_order:120, motion_video_url:`${MOTION_BASE}/111atl/rose-ball.mp4`, motion_poster_url:`${MOTION_BASE}/111atl/rose-ball.jpg` },
   { slug:'juneteenth-atl', title:'Juneteenth ATL', series:'Seasonal', event_date:'2027-06-19', date_label:'June 19, 2027', location_text:'Atlanta, GA', description:'A Juneteenth celebration centered on culture, community and Atlanta.', status:'upcoming', ticket_url:null, sort_order:130, motion_video_url:`${MOTION_BASE}/111atl/juneteenth-atl.mp4`, motion_poster_url:`${MOTION_BASE}/111atl/juneteenth-atl.jpg` }
 ];
+
+const FEATURED_BALL_SLUGS = new Set(['black-ball','snow-ball','champagne-ball']);
+const isSports = event => event.series === 'Member’s Elite — Sports';
+const isFeatured = event => isSports(event) || FEATURED_BALL_SLUGS.has(event.slug);
+const ATF_ROADMAP = [
+  {
+    "date": "2027-02-01",
+    "title": "Recruiting applications",
+    "note": "Proposed recruiting start · not launched"
+  },
+  {
+    "date": "2027-03-06",
+    "title": "Local preliminary #1",
+    "note": "20 cities · venue booking pending"
+  },
+  {
+    "date": "2027-03-13",
+    "title": "Local preliminary #2",
+    "note": "20 cities · venue booking pending"
+  },
+  {
+    "date": "2027-03-20",
+    "title": "Weather / results verification",
+    "note": "Proposed contingency"
+  },
+  {
+    "date": "2027-03-27",
+    "title": "Regional qualifiers",
+    "note": "Seven proposed regional hubs · venues unbooked"
+  },
+  {
+    "date": "2027-04-03",
+    "title": "National selection board",
+    "note": "Proposed league office review"
+  },
+  {
+    "date": "2027-04-10",
+    "title": "Draft / team selection",
+    "note": "Proposed 20-franchise selection window"
+  },
+  {
+    "date": "2027-04-17",
+    "title": "Contracts + eligibility clearance",
+    "note": "Proposed"
+  },
+  {
+    "date": "2027-04-24",
+    "title": "Roster readiness target",
+    "note": "Proposed"
+  },
+  {
+    "date": "2027-05-08",
+    "title": "Regular-season opener",
+    "note": "Tentative · league format unresolved"
+  },
+  {
+    "date": "2027-07-31",
+    "title": "All-Star showcase",
+    "note": "Proposal · Atlanta venue unbooked"
+  },
+  {
+    "date": "2027-08-07",
+    "title": "Quarterfinals",
+    "note": "Proposed East + West pods · unbooked"
+  },
+  {
+    "date": "2027-08-14",
+    "title": "National semifinal",
+    "note": "Proposed · unbooked"
+  },
+  {
+    "date": "2027-08-21",
+    "title": "National Championship",
+    "note": "Proposed · unbooked"
+  }
+];
+const TICKETING_PENDING_REVIEW = new Set(['black-ball','snow-ball','champagne-ball']); // Historic Eventbrite URLs exist but their live date and ticket setup have not been independently verified.
 
 const state = { events: [], selectedEventSlug: null, countdownTimer: null };
 const qs = (selector, root = document) => root.querySelector(selector);
@@ -57,7 +140,9 @@ async function loadEvents() {
 function renderAll() {
   renderQuickCalendar();
   renderLaborDay();
+  renderSports();
   renderBallSeries();
+  renderATFTimeline();
   renderSeasonal();
   renderNextUp();
   qs('#year').textContent = new Date().getFullYear();
@@ -67,7 +152,10 @@ function renderAll() {
 
 function renderQuickCalendar() {
   const target = qs('#quickTrack');
-  target.innerHTML = state.events.map(event => {
+  const today = new Date(); today.setHours(0,0,0,0);
+  const upcoming = state.events.filter(event => isFeatured(event) && event.event_date && dateFromISO(event.event_date) >= today).sort((a,b)=>a.event_date.localeCompare(b.event_date));
+  const counter = qs('#runCount'); if (counter) counter.textContent = `${upcoming.length} upcoming sports + BALL dates`;
+  target.innerHTML = upcoming.map(event => {
     const date = event.event_date ? dateFromISO(event.event_date) : null;
     const month = date ? date.toLocaleString('en-US', { month:'short' }).toUpperCase() : 'TBA';
     const day = date ? String(date.getDate()).padStart(2,'0') : '—';
@@ -93,7 +181,7 @@ function renderLaborDay() {
 
 function renderBallSeries() {
   const target = qs('#ballGrid');
-  const events = state.events.filter(event => event.series === 'Ball Series');
+  const events = state.events.filter(event => FEATURED_BALL_SLUGS.has(event.slug)).sort((a,b)=>a.event_date.localeCompare(b.event_date));
   target.innerHTML = '';
   events.forEach((event, index) => {
     const button = document.createElement('button');
@@ -105,9 +193,35 @@ function renderBallSeries() {
   });
 }
 
+
+function renderSports() {
+  const target = qs('#sportsGrid'); if (!target) return;
+  const events = state.events.filter(isSports).sort((a,b)=>a.event_date.localeCompare(b.event_date));
+  target.innerHTML = events.map((event,index) => {
+    const bucket = event.slug.includes('kings') ? 'MEN’S 5v5' : event.slug.includes('shebang') ? 'WOMEN’S DUNK' : 'CHAMPIONSHIP';
+    const date = dateFromISO(event.event_date);
+    const dow = date.toLocaleDateString('en-US',{weekday:'long'}).toUpperCase();
+    return `<button class="sports-date-card ${event.slug.includes('shebang') ? 'shebang' : event.slug.includes('championship') ? 'championship' : 'kings'}" data-event="${escapeAttr(event.slug)}" type="button" aria-label="Open ${escapeAttr(event.title)}">
+      <span class="sports-card-kicker">MEMBER’S ELITE / ${escapeHtml(bucket)}</span>
+      <span class="sports-card-date">${date.toLocaleDateString('en-US',{month:'short'}).toUpperCase()} <strong>${String(date.getDate()).padStart(2,'0')}</strong></span>
+      <span class="sports-card-day">${dow} / ATLANTA</span>
+      <strong class="sports-card-title">${escapeHtml(event.title)}</strong>
+      <span class="sports-card-action">VIEW EVENT / GET UPDATES ↗</span>
+    </button>`;
+  }).join('');
+}
+function renderATFTimeline() {
+  const target=qs('#atfTimeline'); if (!target) return;
+  target.innerHTML = ATF_ROADMAP.map((phase,i)=> {
+    const date=dateFromISO(phase.date);
+    const readable=date.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});
+    return `<article class="atf-milestone"><span class="atf-milestone-step">${String(i+1).padStart(2,'0')}</span><span class="atf-milestone-date">${escapeHtml(readable)}</span><strong>${escapeHtml(phase.title)}</strong><p>${escapeHtml(phase.note)}</p></article>`;
+  }).join('');
+}
+
 function renderSeasonal() {
   const target = qs('#seasonalGrid');
-  const events = state.events.filter(event => event.series === 'Seasonal');
+  const events = state.events.filter(event => event.series === 'Seasonal' && event.slug !== 'new-years-eve' && (!event.event_date || dateFromISO(event.event_date) >= new Date(new Date().setHours(0,0,0,0))));
   target.innerHTML = '';
   events.forEach((event, index) => {
     const button = document.createElement('button');
@@ -128,7 +242,7 @@ function motionMarkup(event, { fill = false } = {}) {
 }
 
 function fallbackLabel(slug) {
-  const labels = { 'seven-midtown':'ALL WHITE / MIDTOWN', 'tea-time-golf-tournament':'GOLF / LABOR DAY', 'new-years-eve':'MIDNIGHT / ATLANTA' };
+  const labels = { 'members-elite-kings-nov':'MEMBER’S ELITE / MEN', 'members-elite-shebang-nov':'SHE BANG / WOMEN', 'members-elite-championship-nov':'CHAMPIONSHIP SUNDAY', 'members-elite-kings-dec':'MEMBER’S ELITE / MEN', 'members-elite-shebang-dec':'SHE BANG / WOMEN', 'members-elite-championship-dec':'CHAMPIONSHIP SUNDAY', 'seven-midtown':'ALL WHITE / MIDTOWN', 'tea-time-golf-tournament':'GOLF / LABOR DAY', 'new-years-eve':'MIDNIGHT / ATLANTA' };
   return labels[slug] || 'ATLANTA / 111';
 }
 
@@ -152,7 +266,7 @@ function activateReveal() {
 
 function renderNextUp() {
   const today = new Date(); today.setHours(0,0,0,0);
-  const dated = state.events.filter(event => event.event_date).map(event => ({ event, date:dateFromISO(event.event_date) })).filter(item => item.date >= today).sort((a,b) => a.date - b.date);
+  const dated = state.events.filter(event => isFeatured(event) && event.event_date).map(event => ({ event, date:dateFromISO(event.event_date) })).filter(item => item.date >= today).sort((a,b) => a.date - b.date);
   if (!dated.length) { qs('#nextTitle').textContent = 'More coming soon'; qs('#nextDate').textContent = '111ATL'; qs('#countdown').innerHTML = ''; qs('#heroMedia').innerHTML = motionMarkup({slug:'111atl',title:'111ATL'},{fill:true}); return; }
   const next = dated[0];
   qs('#nextTitle').textContent = next.event.title; qs('#nextDate').textContent = next.event.date_label; qs('#nextEventButton').dataset.event = next.event.slug;
@@ -168,11 +282,11 @@ function updateCountdown(date) {
 
 function openEvent(slug, changeRoute = true) {
   const event = state.events.find(item => item.slug === slug); if (!event) return;
-  qs('#dialogSeries').textContent = event.series; qs('#dialogStatus').textContent = event.status === 'announcing' ? 'ANNOUNCING' : 'UPCOMING'; qs('#dialogTitle').textContent = event.title;
+  qs('#dialogSeries').textContent = event.series; qs('#dialogStatus').textContent = event.status === 'announcing' || TICKETING_PENDING_REVIEW.has(event.slug) ? 'DETAILS / TICKETS PENDING VERIFICATION' : 'UPCOMING'; qs('#dialogTitle').textContent = event.title;
   qs('#dialogDate').textContent = event.date_label; qs('#dialogLocation').textContent = event.location_text; qs('#dialogDescription').textContent = event.description;
   qs('#dialogVisual').innerHTML = motionMarkup(event); activateMotion(qs('#dialogVisual'));
   const action = qs('#dialogAction'); action.innerHTML = '';
-  if (event.ticket_url) { const link=document.createElement('a'); link.className='dialog-action-button'; link.href=event.ticket_url; link.target='_blank'; link.rel='noopener noreferrer'; link.innerHTML='<span>Get tickets</span><span>↗</span>'; action.appendChild(link); }
+  if (event.ticket_url && !TICKETING_PENDING_REVIEW.has(event.slug)) { const link=document.createElement('a'); link.className='dialog-action-button'; link.href=event.ticket_url; link.target='_blank'; link.rel='noopener noreferrer'; link.innerHTML='<span>Get tickets</span><span>↗</span>'; action.appendChild(link); }
   else { const button=document.createElement('button'); button.type='button'; button.className='dialog-action-button'; button.dataset.eventNotify=event.slug; button.innerHTML=`<span>${event.status === 'announcing' ? 'Notify me when announced' : 'Get first access'}</span><span>↗</span>`; action.appendChild(button); }
   state.selectedEventSlug=event.slug; document.title=`${event.title} — 111ATL`; document.body.classList.add('dialog-open'); if (!eventDialog.open) eventDialog.showModal();
   if (changeRoute && location.pathname !== `/events/${event.slug}`) history.pushState({event:event.slug},'',`/events/${event.slug}`);
