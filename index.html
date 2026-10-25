@@ -6,7 +6,7 @@
   <meta name="theme-color" content="#050505" />
   <meta name="color-scheme" content="dark" />
   <title>111ATL — Atlanta Events, Culture & Major Weekends</title>
-  <meta name="description" content="111ATL is Atlanta's event-first destination for Labor Day Weekend, The Ball Series, Winter Wonderland, New Year's Eve, Juneteenth ATL and major city moments." />
+  <meta name="description" content="Atlanta 2026 event calendar: Member’s Elite basketball weekends, Black Ball November 28, Snow Ball December 19, Champagne Ball New Year’s Eve, and the separately operated ATF timeline." />
   <meta property="og:title" content="111ATL — What's Next in Atlanta" />
   <meta property="og:description" content="The weekends, formal nights and city moments worth showing up for." />
   <meta property="og:type" content="website" />
@@ -16,7 +16,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="/styles.css?v=3" />
+  <link rel="stylesheet" href="/styles.css?v=4" />
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to events</a>
@@ -25,9 +25,9 @@
   <header class="site-header" id="siteHeader">
     <a class="wordmark" href="/" aria-label="111ATL home"><span>111</span><b>ATL</b></a>
     <nav class="desktop-nav" aria-label="Primary navigation">
-      <a href="#labor-day">Labor Day</a>
+      <a href="#sports">Member’s Elite</a>
       <a href="#ball-series">Ball Series</a>
-      <a href="#seasonal">City Moments</a>
+      <a href="#atf">ATF Timeline</a>
       <a href="#access">Access</a>
     </nav>
     <div class="header-actions">
@@ -35,9 +35,9 @@
       <button class="menu-button" id="menuButton" type="button" aria-expanded="false" aria-controls="mobileNav" aria-label="Open navigation"><span></span><span></span></button>
     </div>
     <nav class="mobile-nav" id="mobileNav" aria-label="Mobile navigation">
-      <a href="#labor-day">Labor Day Weekend</a>
+      <a href="#sports">Member’s Elite Sports</a>
       <a href="#ball-series">The Ball Series</a>
-      <a href="#seasonal">City Moments</a>
+      <a href="#atf">ATF Timeline</a>
       <button data-open-list type="button">Join 111 Access ↗</button>
     </nav>
   </header>
@@ -48,12 +48,12 @@
       <div class="hero-shade" aria-hidden="true"></div>
       <div class="hero-grid" aria-hidden="true"></div>
       <div class="hero-copy">
-        <p class="kicker">Atlanta / events / culture / 2026–27</p>
+        <p class="kicker">Atlanta / independent sports + event divisions / 2026–27</p>
         <h1>THE CITY<br /><em>IS OUTSIDE.</em></h1>
         <div class="hero-lower">
-          <p>Major weekends. Signature series. Atlanta moments built to become tradition.</p>
+          <p>Member’s Elite tournament weekends. The Ball Series. A separate ATF competition roadmap. Real dates. Distinct identities.</p>
           <div class="hero-links">
-            <a class="primary-link" href="#labor-day">Explore events ↘</a>
+            <a class="primary-link" href="#sports">Explore the calendar ↘</a>
             <button class="text-link" data-open-list type="button">Join 111 Access ↗</button>
           </div>
         </div>
@@ -72,19 +72,19 @@
     <section class="quick-calendar" aria-label="111ATL event overview">
       <div class="quick-intro">
         <span>THE RUN</span>
-        <strong>13 announced moments</strong>
+        <strong id="runCount">Upcoming dates</strong>
       </div>
       <div class="quick-track" id="quickTrack"></div>
     </section>
 
     <div class="ticker" aria-hidden="true">
       <div class="ticker-track">
-        <span>111ATL</span><i>✦</i><span>LABOR DAY WEEKEND</span><i>✦</i><span>THE BALL SERIES</span><i>✦</i><span>WINTER WONDERLAND</span><i>✦</i><span>NEW YEAR'S EVE</span><i>✦</i><span>JUNETEENTH ATL</span><i>✦</i>
+        <span>111ATL</span><i>✦</i><span>MEMBER’S ELITE SPORTS</span><i>✦</i><span>THE BALL SERIES</span><i>✦</i><span>ATF — INDEPENDENT LEAGUE</span><i>✦</i><span>CHAMPAGNE BALL / NYE</span><i>✦</i><span>ATLANTA 2026</span><i>✦</i>
         <span>111ATL</span><i>✦</i><span>LABOR DAY WEEKEND</span><i>✦</i><span>THE BALL SERIES</span><i>✦</i><span>WINTER WONDERLAND</span><i>✦</i><span>NEW YEAR'S EVE</span><i>✦</i><span>JUNETEENTH ATL</span><i>✦</i>
       </div>
     </div>
 
-    <section class="weekend-section" id="labor-day">
+    <section class="weekend-section" id="labor-day" hidden aria-hidden="true">
       <div class="weekend-stamp" aria-hidden="true">LDW</div>
       <header class="editorial-header reveal">
         <div>
@@ -103,29 +103,49 @@
       </div>
     </section>
 
+    <section class="sports-division" id="sports" aria-labelledby="sportsTitle">
+      <header class="division-heading reveal">
+        <p class="kicker">01 / Member’s Elite — independent sports division</p>
+        <h2 id="sportsTitle">THE COURT<br /><em>HAS DATES.</em></h2>
+        <p>Six competition dates. Two tournament weekends. Every competition operates under Member’s Elite — not The Ball Series.</p>
+        <a href="https://memberseliteatl.com/tournaments" target="_blank" rel="noopener noreferrer" class="division-cta">View Member’s Elite registration ↗</a>
+      </header>
+      <div class="sports-grid" id="sportsGrid" aria-live="polite"></div>
+      <p class="division-note">Atlanta, Georgia · Event times, venues, admission and registration inventory remain subject to confirmation.</p>
+    </section>
     <section class="ball-section" id="ball-series">
       <div class="ball-giant" aria-hidden="true">BALL</div>
       <header class="ball-header reveal">
         <div class="ball-number">02</div>
         <div>
-          <p class="kicker ink-kicker">A 111ATL signature series · 25+</p>
+          <p class="kicker ink-kicker">02 / The Ball Series — independent events division</p>
           <h2>THE<br /><em>BALL SERIES.</em></h2>
         </div>
         <div class="ball-manifesto">
           <span>OCT 2026 → FEB 2027</span>
-          <p>Six formal nights. Six visual worlds. One series designed to become part of Atlanta's annual calendar.</p>
+          <p>BLACK BALL · NOV 28. SNOW BALL · DEC 19. CHAMPAGNE BALL · DEC 31 / NEW YEAR’S EVE. Three distinct productions with independent offers and access.</p>
         </div>
       </header>
       <div class="ball-rail-wrap">
         <div class="ball-rail" id="ballGrid" aria-live="polite"></div>
       </div>
-      <div class="rail-hint" aria-hidden="true"><span>DRAG / SCROLL</span><i></i><span>06 NIGHTS</span></div>
+      <div class="rail-hint" aria-hidden="true"><span>DRAG / SCROLL</span><i></i><span>03 FEATURED NIGHTS</span></div>
     </section>
 
+    <section class="atf-division" id="atf" aria-labelledby="atfTitle">
+      <header class="division-heading reveal">
+        <p class="kicker">03 / American Track &amp; Field — independent league</p>
+        <h2 id="atfTitle">THE ROAD<br /><em>TO 2027.</em></h2>
+        <p>ATF's proposed athlete recruitment, tryout, selection, regular-season and postseason sequence. Dates shown below are planning targets, not confirmed venue bookings or tickets.</p>
+        <a class="division-cta" href="https://www.americantnf.com/apply/athlete" target="_blank" rel="noopener noreferrer">ATF athlete interest ↗</a>
+      </header>
+      <div class="atf-timeline-grid" id="atfTimeline" aria-live="polite"></div>
+      <p class="division-note">ATF controls its own applications, city operations, franchise relationships and event ticketing. Never treat an unbooked date as an on-sale event.</p>
+    </section>
     <section class="city-section" id="seasonal">
       <header class="editorial-header reveal">
         <div>
-          <p class="section-number">03 / MAJOR CITY MOMENTS</p>
+          <p class="section-number">04 / OTHER CITY MOMENTS</p>
           <p class="kicker">Seasonal / cultural / annual</p>
           <h2>ATLANTA<br /><em>HAS DATES.</em></h2>
         </div>
@@ -156,7 +176,7 @@
 
   <footer>
     <div class="footer-brand"><a class="wordmark footer-mark" href="#top"><span>111</span><b>ATL</b></a><p>WHAT'S NEXT IN ATLANTA.</p></div>
-    <div class="footer-links"><a href="#labor-day">Labor Day</a><a href="#ball-series">Ball Series</a><a href="#seasonal">City Moments</a><button data-open-list type="button">111 Access</button></div>
+    <div class="footer-links"><a href="#sports">Member’s Elite</a><a href="#ball-series">Ball Series</a><a href="#atf">ATF Timeline</a><button data-open-list type="button">111 Access</button></div>
     <div class="footer-end"><span>ATLANTA, GA</span><span>© <span id="year">2026</span> 111ATL</span></div>
   </footer>
 
@@ -193,6 +213,6 @@
   </dialog>
 
   <noscript><div class="noscript">111ATL requires JavaScript to load the live event calendar.</div></noscript>
-  <script src="/app.js?v=3" defer></script>
+  <script src="/app.js?v=4" defer></script>
 </body>
 </html>
